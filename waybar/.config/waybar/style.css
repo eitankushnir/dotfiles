@@ -1,0 +1,98 @@
+@import "colors.css";
+
+* {
+    font-family: JetBrainsMono Nerd Font, Awesome Font, monospace;
+    font-size: 14px;
+    border: none;
+    box-shadow: none;
+    padding: 0 8px;
+    background: transparent;
+}
+
+window#waybar {
+    margin: 5px 5px;
+    padding: 8px 5px;
+    background: @background;
+}
+
+#workspaces {
+    margin: 5px 5px;
+    padding: 8px 5px;
+    background: @inverse_on_surface;
+    border-radius: 12px;
+    color: @inverse_primary;
+}
+
+#workspaces button {
+    font-weight: bold;
+    padding: 0px 5px;
+    margin: 0px 3px;
+    color: @on_background;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    font-weight: bold;
+    color: @primary;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    color: @tertiary;
+    font-weight: bold;
+    background-size: 400% 400%;
+}
+
+#pulseaudio {
+    color: @primary;
+}
+#language {
+    color: @secondary;
+}
+
+#temperature {
+    color: @primary;
+}
+#cpu {
+    color: @secondary;
+}
+#memory {
+    color: @tertiary;
+}
+
+/*#quickaccess,
+#hardwareinfo {
+    margin: 5px 5px;
+    padding: 8px 5px;
+    border-radius: 12px;
+    background: @inverse_on_surface;
+}*/
+
+#network {
+    margin: 5px 5px;
+    padding: 8px 15px;
+    border-radius: 12px;
+    color: @primary;
+}
+
+/*#custom-power {
+    margin: 5px 5px;
+    padding: 8px 5px;
+    background: @inverse_on_surface;
+    min-width: 30px;
+    border-radius: 12px;
+    color: @red;
+}*/
+
+#window, #clock, #custom-applauncher, #quickaccess, #hardwareinfo, #custom-power {
+    margin: 5px 5px;
+    padding: 8px 5px;
+    border-radius: 12px;
+    color: @on_surface;
+}
+
+tooltip {
+    background: @background;
+    color: @foreground;
+    border: 1px solid @accent;
+}

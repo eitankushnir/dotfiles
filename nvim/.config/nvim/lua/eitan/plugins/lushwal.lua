@@ -1,0 +1,22 @@
+return {
+    --    {
+    --        "oncomouse/lushwal.nvim",
+    --        cmd = { "LushwalCompile" },
+    --        dependencies = {
+    --            { "rktjmp/lush.nvim" },
+    --            { "rktjmp/shipwright.nvim" },
+    --        },
+    --        lazy = false,
+    --        config = function()
+    --            vim.g.lushwal_configuration = {
+    --                transparent_background = true,
+    --                addons = {
+    --                    mini_nvim = true,
+    --                    nvim_cmp = true,
+    --                    telescope_nvim = true,
+    --                    treesitter = true
+    --                }
+    --            }
+    --        end,
+    --    }
+}
