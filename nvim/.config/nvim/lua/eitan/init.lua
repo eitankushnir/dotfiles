@@ -53,6 +53,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = "*.h",
+    callback = function()
+        vim.bo.filetype = "c"
+    end
+})
+
 autocmd("Signal", {
     pattern = "SIGUSR1",
     callback = function()

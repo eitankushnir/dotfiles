@@ -103,7 +103,8 @@
         "tooltip-format-ethernet": "{ipaddr}  ",
     },
     "custom/power": {
-        "format": " "
+        "format": " ",
+        "on-click": "wlogout",
     }
 
 }
