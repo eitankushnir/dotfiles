@@ -27,7 +27,7 @@ return {
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = { "lua_ls", "bashls", "pyright", "clangd", "cssls", "hyprls" },
+            ensure_installed = { "lua_ls", "bashls", "pyright", "clangd", "cssls", "hyprls", "csharp_ls" },
             handlers = {
                 function(server_name) --default handler
                     require("lspconfig")[server_name].setup {

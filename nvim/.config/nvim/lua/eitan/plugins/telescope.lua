@@ -38,6 +38,6 @@ return {
             builtin.lsp_document_symbols({ symbols = 'function' })
         end)
 
-        require("eitan.telescope.multigrep").setup()
+        require("eitan.configs.telescope-multigrep").setup()
     end
 }

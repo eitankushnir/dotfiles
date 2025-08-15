@@ -60,12 +60,11 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end
 })
 
-autocmd("Signal", {
-    pattern = "SIGUSR1",
-    callback = function()
-        local pywal16 = require('pywal16')
-
-        pywal16.setup()
-        vim.cmd.colorscheme("pywal16")
-    end
-})
+-- Function to make background transparent
+vim.cmd [[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NormalNC guibg=NONE ctermbg=NONE
+  hi SignColumn guibg=NONE ctermbg=NONE
+  hi LineNr guibg=NONE ctermbg=NONE
+  hi EndOfBuffer guibg=NONE ctermbg=NONE
+]]
