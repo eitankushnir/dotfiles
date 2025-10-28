@@ -2,97 +2,79 @@
 
 * {
     font-family: JetBrainsMono Nerd Font, Awesome Font, monospace;
-    font-size: 14px;
     border: none;
     box-shadow: none;
-    padding: 0 8px;
-    background: transparent;
+    border-radius: 0;
 }
 
 window#waybar {
-    margin: 5px 5px;
-    padding: 8px 5px;
     background: @background;
-}
-
-#workspaces {
-    margin: 5px 5px;
-    padding: 8px 5px;
-    background: @inverse_on_surface;
-    border-radius: 12px;
-    color: @inverse_primary;
+    color: @on_background;
+    margin: 8px 12px;
 }
 
 #workspaces button {
-    font-weight: bold;
-    padding: 0px 5px;
-    margin: 0px 3px;
     color: @on_background;
-    transition: all 0.3s ease-in-out;
-}
-
-#workspaces button.active {
-    font-weight: bold;
-    color: @primary;
-    transition: all 0.3s ease-in-out;
+    transition: none;
 }
 
 #workspaces button:hover {
-    color: @tertiary;
-    font-weight: bold;
-    background-size: 400% 400%;
+    background: transparent;
 }
 
-#pulseaudio {
-    color: @primary;
-}
-#language {
-    color: @secondary;
+#workspaces button.visible {
+    border-bottom: 2px solid @tertiary;
+    border-radius: 0px;
 }
 
-#temperature {
-    color: @primary;
-}
-#cpu {
-    color: @secondary;
-}
-#memory {
-    color: @tertiary;
-}
-
-/*#quickaccess,
-#hardwareinfo {
-    margin: 5px 5px;
-    padding: 8px 5px;
-    border-radius: 12px;
-    background: @inverse_on_surface;
-}*/
-
-#network {
-    margin: 5px 5px;
-    padding: 8px 15px;
-    border-radius: 12px;
-    color: @primary;
-}
-
-/*#custom-power {
-    margin: 5px 5px;
-    padding: 8px 5px;
-    background: @inverse_on_surface;
-    min-width: 30px;
-    border-radius: 12px;
-    color: @red;
-}*/
-
-#window, #clock, #custom-applauncher, #quickaccess, #hardwareinfo, #custom-power {
-    margin: 5px 5px;
-    padding: 8px 5px;
-    border-radius: 12px;
-    color: @on_surface;
+#workspaces button.active {
+    border-bottom: 2px solid @primary;
+    border-radius: 0px;
 }
 
 tooltip {
     background: @background;
     color: @foreground;
     border: 1px solid @accent;
+}
+
+#pulseaudio {
+    border-bottom: 2px solid @primary;
+    border-radius: 0;
+    padding: 0 2px;
+    margin-right: 20px;
+}
+
+
+#keyboard {
+    margin-right: 20px;
+}
+
+#temperature {
+    margin-right: 8px;
+    color: @primary;
+}
+
+#cpu {
+    margin-right: 8px;
+    color: @secondary;
+}
+
+#memory {
+    margin-right: 8px;
+    color: @tertiary;
+}
+
+#hardwareinfo {
+    margin-right: 20px;
+    border-bottom: 2px solid @primary;
+}
+
+#network {
+    margin-right: 20px;
+}
+
+#custom-power {
+    margin-right: 5px;
+    color: red;
 }
