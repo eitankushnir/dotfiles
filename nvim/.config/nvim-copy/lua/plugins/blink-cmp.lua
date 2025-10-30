@@ -12,8 +12,20 @@ return {
             ["<C-e>"] = { "hide", "fallback" },
             ["<CR>"] = { "accept", "fallback" },
 
-            ["<Tab>"] = { "accept", "snippet_forward", "fallback" },
-            ["<S-Tab>"] = { "snippet_backward", "fallback" },
+            ["<Tab>"] = {
+                function(cmp)
+                    return cmp.select_next()
+                end,
+                "snippet_forward",
+                "fallback"
+            },
+            ["<S-Tab>"] = {
+                function(cmp)
+                    return cmp.select_prev()
+                end,
+                "snippet_backward",
+                "fallback",
+            },
             ["<Up>"] = { "select_prev", "fallback" },
             ["<Down>"] = { "select_next", "fallback" },
             ["<C-p>"] = { "select_prev", "fallback" },

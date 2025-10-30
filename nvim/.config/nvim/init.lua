@@ -5,7 +5,8 @@ require("config.autocmd")
 require("config.lsp")
 require("config.lazy")
 
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd [[ TransparentEnable ]]
+vim.cmd [[ colorscheme kanagawa ]]
 
 -- Function to make background transparent
 --vim.cmd [[
@@ -13,6 +14,7 @@ vim.cmd[[colorscheme tokyonight]]
 --  hi NormalNC guibg=NONE ctermbg=NONE
 --  hi NormalFloat guibg=NONE ctermbg=NONE
 --  hi FloatBorder guibg=NONE ctermbg=NONE
+--  hi FloatTitle guibg=NONE ctermbg=NONE
 --  hi SignColumn guibg=NONE ctermbg=NONE
 --  hi LineNr guibg=NONE ctermbg=NONE
 --  hi EndOfBuffer guibg=NONE ctermbg=NONE

@@ -26,7 +26,7 @@ return {
         },
         keys = {
             --Picker Keybindings
-            { "<leader><space>", function() Snacks.picker.files() end,      desc = "Find Files" },
+            { "<leader><space>", function() Snacks.picker.files() end,    desc = "Find Files" },
             {
                 "<leader>fb",
                 function()
@@ -49,9 +49,8 @@ return {
                     })
                 end
             },
-            { "<leader>fg",      function() Snacks.picker.grep() end,       desc = "Find grep" },
-            { "<leader>e",       function() Snacks.picker.explorer() end,   desc = "Open explorer" },
-            { "<M-h>",           function() Snacks.picker.highlights() end, desc = "Show Highlight groups" },
+            { "<leader>fg",      function() Snacks.picker.grep() end,     desc = "Find grep" },
+            { "<leader>e",       function() Snacks.picker.explorer() end, desc = "Open explorer" },
             {
                 "<M-b>",
                 function()

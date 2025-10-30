@@ -11,7 +11,6 @@ return {
                 "c",
                 "cpp",
                 "python",
-                "bash",
             },
         },
         config = function(_, opts)
