@@ -13,4 +13,9 @@ return {
         priority = 1000,
         opts = {},
     },
+    {
+        "bjarneo/pixel.nvim",
+        priority = 1000,
+        opts = {},
+    }
 }

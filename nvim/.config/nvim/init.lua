@@ -6,7 +6,7 @@ require("config.lsp")
 require("config.lazy")
 
 vim.cmd [[ TransparentEnable ]]
-vim.cmd [[ colorscheme kanagawa ]]
+vim.cmd [[ colorscheme tokyonight ]]
 
 -- Function to make background transparent
 --vim.cmd [[

@@ -7,7 +7,7 @@ return {
         opts = {
             ensure_installed = {
                 "lua",
-                "hyprland",
+                "hyprlang",
                 "c",
                 "cpp",
                 "python",
