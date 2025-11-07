@@ -8,9 +8,10 @@
 }
 
 window#waybar {
-    background: @background;
+    background: alpha(@surface_dim, 0.85);
     color: @on_background;
     margin: 8px 12px;
+    
 }
 
 #workspaces button {
