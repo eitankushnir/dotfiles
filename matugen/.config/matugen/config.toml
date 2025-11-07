@@ -24,12 +24,12 @@ output_path = '~/.config/waypaper/style.css'
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-3.0/gtk.css'
-post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark'
 
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/gtk.css'
-post_hook = 'pkill nautilus'
+post_hook = 'nautilus -q'
 
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
@@ -40,7 +40,12 @@ input_path = '~/.config/matugen/templates/qtct-colors.conf'
 output_path = '~/.config/qt6ct/colors/matugen.conf'
 
 [templates.brave]
-pre_hook = '~/.dotfiles/scripts/check_for_brave.sh'
+pre_hook = '~/.dotfiles/bin/hyprland-close-windows-of-class brave-browser'
 input_path = '~/.config/matugen/templates/brave-matugen.sh'
-output_path = '/tmp/brave_color_change.sh'
-post_hook = 'chmod +x /tmp/brave_color_change.sh && /tmp/brave_color_change.sh'
+output_path = '/tmp/brave-color-change'
+post_hook = 'chmod +x /tmp/brave-color-change && /tmp/brave-color-change'
+
+[templates.vesktop]
+input_path = '~/.config/matugen/templates/midnight-discord.css'
+output_path = '~/.config/vesktop/themes/midnight-discord.css'
+
