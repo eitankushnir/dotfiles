@@ -49,3 +49,7 @@ post_hook = 'chmod +x /tmp/brave-color-change && /tmp/brave-color-change'
 input_path = '~/.config/matugen/templates/midnight-discord.css'
 output_path = '~/.config/vesktop/themes/midnight-discord.css'
 
+[templates.mako]
+input_path = '~/.config/matugen/templates/mako-matugen'
+output_path = '~/.config/mako/config'
+post_hook = 'makoctl reload'
