@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <class>"
+    exit 1
+fi
+CLASS=$1
+
+ADDRESSES=$(hyprctl clients -j | jq -r --arg class "$CLASS" '.[] | select(.class == $class) | .address')
+if [[ ${ADDRESSES[@]} -eq 0 ]]; then
+    echo "0" > "/tmp/$CLASS-was-running"
+else
+    echo "1" > "/tmp/$CLASS-was-running"
+fi
+
+for address in $ADDRESSES; do
+    hyprctl dispatch closewindow address:"$address"
+done

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check for image argument
 if [ -z "$1" ]; then
@@ -11,7 +11,6 @@ WALLPAPER="$1"
 # Validate file
 if [ ! -f "$WALLPAPER" ]; then
     echo "File does not exist: $WALLPAPER"
-    notify-send ":("
     exit 2
 fi
 
@@ -20,8 +19,7 @@ echo "Setting wallpaper..."
 export PATH="$HOME/.cargo/bin:$PATH"
 echo "preload = $WALLPAPER" > ~/.config/hypr/hyprpaper.conf
 echo "wallpaper = ,$WALLPAPER" >> ~/.config/hypr/hyprpaper.conf
-killall hyprpaper 2>/dev/null
-hyprpaper &
+hyprctl hyprpaper reload ,"$WALLPAPER"
 
 # Generate theme with matugen
 echo "Generating colors with matugen..."

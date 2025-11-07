@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 /path/to/edit"
+fi
+
+PATH_TO_EDIT=$1
+cd "$PATH_TO_EDIT"
+nvim "$PATH_TO_EDIT"

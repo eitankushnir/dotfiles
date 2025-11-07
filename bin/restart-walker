@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+pkill elephant 
+pkill walker 
+
+elephant &
+wait 2
+walker --gapplication-service &
