@@ -49,7 +49,7 @@ return {
                     })
                 end
             },
-            { "<leader>fg",      function() Snacks.picker.grep() end,       desc = "Find grep" },
+            { "<C-f>",           function() Snacks.picker.grep() end,       desc = "Find grep" },
             { "<leader>e",       function() Snacks.picker.explorer() end,   desc = "Open explorer" },
             { "<M-h>",           function() Snacks.picker.highlights() end, desc = "Show Highlight groups" },
             {
