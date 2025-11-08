@@ -5,5 +5,10 @@ if [[ $# -ne 1 ]]; then
 fi
 
 PATH_TO_EDIT=$1
-cd "$PATH_TO_EDIT"
+if [[ -d "$PATH_TO_EDIT" ]]; then
+    DIR="$PATH_TO_EDIT"
+else
+    DIR=$(dirname "$PATH_TO_EDIT")
+fi
+cd "$DIR"
 nvim "$PATH_TO_EDIT"
