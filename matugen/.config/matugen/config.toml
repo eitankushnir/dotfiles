@@ -2,20 +2,16 @@
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-output_path = '~/.config/hypr/colors.conf'
+output_path = '~/.dotfiles/themes/matugen/hyprland.conf'
 post_hook = 'hyprctl reload'
 
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
-output_path = '~/.config/waybar/colors.css'
+output_path = '~/.dotfiles/themes/matugen/colors.css'
 
 [templates.alacritty]
 input_path = '~/.config/matugen/templates/alacritty.toml'
-output_path = '~/.config/alacritty/colors.toml'
-
-[templates.rofi]
-input_path = '~/.config/matugen/templates/rofi-colors.rasi'
-output_path = '~/.config/rofi/colors.rasi'
+output_path = '~/.dotfiles/themes/matugen/alacritty.toml'
 
 [templates.waypaper]
 input_path = '~/.config/matugen/templates/waypaper.css'
@@ -53,3 +49,11 @@ output_path = '~/.config/vesktop/themes/midnight-discord.css'
 input_path = '~/.config/matugen/templates/mako-matugen'
 output_path = '~/.config/mako/config'
 post_hook = 'makoctl reload'
+
+#[templates.neovim]
+#input_path = '~/.config/matugen/templates/neovim.vim'
+#output_path = '~/.cache/wal/colors-wal.vim'
+
+#[templates.walker]
+#input_path = '~/.config/matugen/templates/colors.css'
+#output_path = '~/.config/walker/themes/dotfiles/colors.css'
