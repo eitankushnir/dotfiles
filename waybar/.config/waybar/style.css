@@ -1,4 +1,4 @@
-@import "colors.css";
+@import "../../.dotfiles/current/theme/colors.css";
 
 * {
     font-family: JetBrainsMono Nerd Font, Awesome Font, monospace;

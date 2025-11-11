@@ -1,5 +1,5 @@
 [general]
-import = ["colors.toml"]
+import = ["~/.dotfiles/current/theme/alacritty.toml"]
 
 [window]
 opacity = 0.8

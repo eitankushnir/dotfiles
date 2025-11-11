@@ -9,5 +9,4 @@ require("config.lazy")
 
 vim.cmd [[ TransparentEnable ]]
 vim.cmd [[ hi TreesitterContextBottom cterm=underline ]]
-
 require("config.pixel-fixes")

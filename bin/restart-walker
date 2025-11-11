@@ -5,4 +5,5 @@ pkill walker
 
 elephant &
 wait 2
+sleep 0.005
 walker --gapplication-service &

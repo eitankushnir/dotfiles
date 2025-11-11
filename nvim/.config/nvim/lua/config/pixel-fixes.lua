@@ -1,3 +1,7 @@
+if vim.g.colors_name ~= "pixel" then
+    return
+end
+
 local ok, colors = pcall(require, "pixel.colorscheme")
 if not ok then
     return
