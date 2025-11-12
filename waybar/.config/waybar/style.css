@@ -1,4 +1,4 @@
-@import "../../.dotfiles/current/theme/colors.css";
+@import "../../.dotfiles/current/theme/waybar.css";
 
 * {
     font-family: JetBrainsMono Nerd Font, Awesome Font, monospace;
@@ -8,14 +8,14 @@
 }
 
 window#waybar {
-    background: alpha(@surface_dim, 0.85);
-    color: @on_background;
+    background: alpha(@background, 0.85);
+    color: @foreground;
     margin: 8px 12px;
     
 }
 
 #workspaces button {
-    color: @on_background;
+    color: @foreground;
     transition: none;
 }
 
@@ -24,23 +24,23 @@ window#waybar {
 }
 
 #workspaces button.visible {
-    border-bottom: 2px solid @tertiary;
+    border-bottom: 2px solid @accent2;
     border-radius: 0px;
 }
 
 #workspaces button.active {
-    border-bottom: 2px solid @primary;
+    border-bottom: 2px solid @accent;
     border-radius: 0px;
 }
 
 tooltip {
     background: @background;
     color: @foreground;
-    border: 1px solid @accent;
+    border: 1px solid @foreground;
 }
 
 #pulseaudio {
-    border-bottom: 2px solid @primary;
+    border-bottom: 2px solid @accent;
     border-radius: 0;
     padding: 0 2px;
     margin-right: 20px;
@@ -53,22 +53,22 @@ tooltip {
 
 #temperature {
     margin-right: 8px;
-    color: @primary;
+    color: @temp_color;
 }
 
 #cpu {
     margin-right: 8px;
-    color: @secondary;
+    color: @cpu_color;
 }
 
 #memory {
     margin-right: 8px;
-    color: @tertiary;
+    color: @mem_color;
 }
 
 #hardwareinfo {
     margin-right: 20px;
-    border-bottom: 2px solid @primary;
+    border-bottom: 2px solid @accent;
 }
 
 #network {
