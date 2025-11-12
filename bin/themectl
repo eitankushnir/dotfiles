@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+source "./lib/gummies.sh"
+
+THEMES_DIR="$HOME/.dotfiles/themes"
+CURRENT_THEME_DIR="$HOME/.dotfiles/current/theme"
+
+is_dynamic_theme() {
+    local name="$1"
+    [[ "$name" == "wallust" || "$name" == "matugen" ]]
+}
+
+get_current_theme() {
+    if [[ -L "$CURRENT_THEME_DIR" ]]; then
+        basename $(readlink "$CURRENT_THEME_DIR")
+    else
+        echo ""
+    fi
+}
+
+get_theme_list() {
+    local themes=("dynamic")
+    local theme_paths=("$THEMES_DIR"/*/)
+    for theme in "${theme_paths[@]}"; do
+        base=$(basename "$theme")
+        if [[ "$base" == "wallpapers" || "$base" == "matugen" || "$base" == "wallust" ]]; then
+            continue
+        fi
+        themes+=("$base")
+    done
+    echo "${themes[@]}"
+}
+
+
+reload_apps() {
+    log_step "Reloading Apps..."
+    hyprctl reload
+    reload-waybar
+    makoctl reload
+}
+
+add_wallpaper() {
+    local wallpaper="$1"
+
+    #Check if file is given and exists
+    if [[ -z "$wallpaper" ]]; then
+        log_error "Error: Wallpaper file not provided"
+        exit 1
+    fi
+    if [[ ! -f "$wallpaper" ]]; then
+        log_error "Error: No such file: $wallpaper"
+        exit 1
+    fi
+
+    # Select theme via gum
+    local themes=$(get_theme_list)
+    local theme=$(gum choose ${themes[@]} --height 6 --header "Select a Theme (Will also be available for dynamic themes)")
+    log_step "Adding wallpaper to theme: $theme"
+    local fname=$(basename "$wallpaper")
+
+    # Copy file to global wallpaper folder (if needed) and add it to the select theme wallpapers folder
+    if [[ "$(realpath $(dirname "$wallpaper"))" != "$THEMES_DIR/wallpapers" ]]; then
+        cp "$wallpaper" "$THEMES_DIR/wallpapers/$fname"
+    fi
+    if [[ "$theme" != "dynamic" ]]; then
+        ln -sf "$THEMES_DIR/wallpapers/$fname" "$THEMES_DIR/$theme/wallpapers/"
+    fi
+    log_success "Wallpaper successfuly added to theme: $theme"
+}
+
+
+
+main() {
+    if [[ $# -eq 0 ]]; then 
+        echo "Usage: themectl <theme-name> | --add-bg /path/to/wallpaper | --next-bg | --wallpaper"
+        exit 1
+    fi
+
+    case "$1" in
+        --wallpaper)
+            change_wallpaper
+            ;;
+        --next-bg)
+            cycle_wallpaper
+            ;;
+        --add-bg)
+            add_wallpaper "$2"
+            ;;
+        *)
+            set_theme "$1"
+            ;;
+    esac
+            
+
+}
+
+main "$@"
+
+
+
+#handle wallpaper
+
+
