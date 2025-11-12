@@ -6,16 +6,25 @@ output_path = '~/.dotfiles/themes/matugen/hyprland.conf'
 post_hook = 'hyprctl reload'
 
 [templates.waybar]
-input_path = '~/.config/matugen/templates/colors.css'
-output_path = '~/.dotfiles/themes/matugen/colors.css'
+input_path = '~/.config/matugen/templates/waybar.css'
+output_path = '~/.dotfiles/themes/matugen/waybar.css'
 
 [templates.alacritty]
 input_path = '~/.config/matugen/templates/alacritty.toml'
 output_path = '~/.dotfiles/themes/matugen/alacritty.toml'
 
+[templates.mako]
+input_path = '~/.config/matugen/templates/mako.ini'
+output_path = '~/.dotfiles/themes/matugen/mako.ini'
+post_hook = 'makoctl reload'
+
 [templates.waypaper]
 input_path = '~/.config/matugen/templates/waypaper.css'
-output_path = '~/.config/waypaper/style.css'
+output_path = '~/.dotfiles/themes/matugen/waypaper.css'
+
+[templates.walker]
+input_path = '~/.config/matugen/templates/walker.css'
+output_path = '~/.dotfiles/themes/matugen/walker.css'
 
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
@@ -45,15 +54,8 @@ post_hook = 'chmod +x /tmp/brave-color-change && /tmp/brave-color-change'
 input_path = '~/.config/matugen/templates/midnight-discord.css'
 output_path = '~/.config/vesktop/themes/midnight-discord.css'
 
-[templates.mako]
-input_path = '~/.config/matugen/templates/mako-matugen'
-output_path = '~/.config/mako/config'
-post_hook = 'makoctl reload'
 
 #[templates.neovim]
 #input_path = '~/.config/matugen/templates/neovim.vim'
 #output_path = '~/.cache/wal/colors-wal.vim'
 
-#[templates.walker]
-#input_path = '~/.config/matugen/templates/colors.css'
-#output_path = '~/.config/walker/themes/dotfiles/colors.css'
