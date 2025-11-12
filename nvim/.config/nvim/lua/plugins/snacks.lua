@@ -73,6 +73,7 @@ return {
                 end,
                 desc = "Keymaps",
             },
+            { "<leader>gd", function() Snacks.picker.lsp_definitions() end, desc = "Show lsp definistions" },
         }
     }
 }
