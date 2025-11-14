@@ -7,17 +7,17 @@
         "clock",
     ],
     "modules-right": [
+        "hyprland/language",
         "pulseaudio",
-        "group/keyboard",
-        "group/hardwareinfo",
         "network",
+        "custom/separator",
         "custom/power"
     ],
 
-    "custom/applauncher": {
+    "custom/launcher": {
         "format": "{icon}",
-        "format-icons": " ",
-        "on-click": "rofi -show drun",
+        "format-icons": "",
+        "on-click": "uwsm app -- walker",
         "tooltip": false,
     },
 
@@ -49,11 +49,6 @@
         "format": "{name}",
      },
 
-    "group/keyboard": {
-        "orientation": "horizontal",
-        "modules": ["hyprland/language", "keyboard-state"],
-    },
-
     "hyprland/language": {
         "format": " {}",
         "format-en": "EN",
@@ -61,29 +56,19 @@
         "on-click": "hyprctl switchxkblayout razer-razer-blackwidow-elite next"
     },
 
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": {
-            "numlock": "NUM: {icon}",
-            "capslock": "CAPS: {icon}",
-        },
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
-
-
     "pulseaudio": {
         "format": "{icon}  {volume}%",
         "format-icons": {
             "headphone": "",
             "headset": "",
-            "default": ["", ""]
+            "default": ["", "", ""]
         },
-        "format-muted": "",
-        "on-click": "hyprctl dispatch exec pavucontrol"
+        "format-muted": "",
+        "tooltip-format": "Playing at {volume}%",
+        "on-scroll-up": "swayosd-client --output-volume raise",
+        "on-scroll-down": "swayosd-client --output-volume lower",
+        "on-click": "hyprctl dispatch exec pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
 
     "group/hardwareinfo": {
@@ -105,13 +90,20 @@
     },
     "network": {
         "format": "{}",
-        "format-ethernet": "  {bandwidthDownBits}  {bandwidthUpBits} ",
-        "format-disconnected": "NO INTERNET",
-        "tooltip-format-ethernet": "{ipaddr}  ",
+        "format-ethernet": "󰌘 {ifname}",
+        "format-disconnected": "󰌙",
+        "format-linked": "󰌚",
+        "tooltip-format-ethernet": "{bandwidthDownBits}  {bandwidthUpBits} ",
     },
     "custom/power": {
         "format": " ",
         "on-click": "wlogout",
+        "tooltip": false,
+    },
+    "custom/separator": {
+        "format": "│",
+        "tooltip": false,
     }
+
 
 }
