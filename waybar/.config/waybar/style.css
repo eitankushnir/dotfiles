@@ -1,9 +1,7 @@
 @import "../../.dotfiles/current/theme/waybar.css";
 
 * {
-    background-color: @background;
-    color: @foreground;
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
     border: none;
     box-shadow: none;
     border-radius: 0;
@@ -11,7 +9,7 @@
 }
 
 window#waybar {
-    background: alpha(@background, 0.85);
+    background: alpha(@background, 0.75);
 }
 
 #custom-launcher {
@@ -28,12 +26,12 @@ window#waybar {
 }
 
 #workspaces button.visible {
-    border-bottom: 2px solid @accent2;
+    border-bottom: 2px solid @visible_workspace;
     border-radius: 0px;
 }
 
 #workspaces button.active {
-    border-bottom: 2px solid @accent;
+    border-bottom: 2px solid @current_workspace;
     border-radius: 0px;
 }
 
@@ -43,7 +41,6 @@ tooltip {
 
 #custom-power {
     font-weight: bold;
-    margin-right: 5px;
 }
 
 #custom-separator {
@@ -64,8 +61,7 @@ tooltip {
     margin-right: 15px;
 }
 
-
-
+/*
 #temperature {
     margin-right: 8px;
     color: @temp_color;
@@ -85,5 +81,5 @@ tooltip {
     margin-right: 20px;
     border-bottom: 2px solid @accent;
 }
-
+*/
 

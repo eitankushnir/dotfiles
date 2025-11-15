@@ -57,7 +57,7 @@
     },
 
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
+        "format": "{icon} {volume}%",
         "format-icons": {
             "headphone": "",
             "headset": "",
@@ -68,7 +68,7 @@
         "on-scroll-up": "swayosd-client --output-volume raise",
         "on-scroll-down": "swayosd-client --output-volume lower",
         "on-click": "hyprctl dispatch exec pavucontrol",
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        "on-click-right": "swayosd-client --output-volume mute-toggle"
     },
 
     "group/hardwareinfo": {
