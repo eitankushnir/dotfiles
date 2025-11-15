@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "./gummies.sh"
+source "$HOME/.dotfiles/bin/lib/gummies.sh"
 
 generate_colors_from_wallpaper() {
     local wallpaper="$1"

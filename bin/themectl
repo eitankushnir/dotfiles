@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 source "$HOME/.dotfiles/bin/lib/gummies.sh"
+source "$HOME/.dotfiles/bin/lib/handle-dynamic-theme.sh"
 
 THEMES_DIR="$HOME/.dotfiles/themes"
 CURRENT_THEME_DIR="$HOME/.dotfiles/current/theme"
@@ -35,8 +36,11 @@ get_theme_list() {
 reload_apps() {
     log_step "Reloading Apps..."
     hyprctl reload
-    reload-waybar
+    restart-app waybar
     makoctl reload
+    if pgrep -x waypaper; then
+        restart-app waypaper
+    fi
 }
 
 add_wallpaper() {
@@ -90,9 +94,16 @@ set_wallpaper() {
 
     log_step "Setting Wallpaper..."
     ln -nsf "$wallpaper" "$CURRENT_WALLPAPER"
-    hyprctl hyprpaper preload "$wallpaper"
-    hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper"
-    hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper"
+    if is_dynamic_theme "$(get_current_theme)"; then
+        generate_colors_from_wallpaper "$wallpaper"
+        reload_apps
+    fi
+
+    if ! pgrep -x waypaper; then
+        hyprctl hyprpaper preload "$wallpaper"
+        hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper"
+        hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper"
+    fi
     log_success "Wallpaper Applied"
 }
 
@@ -114,12 +125,17 @@ random_wallpaper(){
     # Get a random wallpaper that is not the current one
     local current_wall=$(realpath "$CURRENT_WALLPAPER")
     local rand_bg=$(find "$wallpapers" -type "$search_type" ! -name "$(basename "$current_wall")" | shuf -n 1)
-    set_wallpaper "$rand_bg"
+    echo "$rand_bg"
 }
 
 set_theme() {
     local theme_name="$1"
     local theme_dir="$THEMES_DIR/$theme_name"
+    local search_type="l"
+    if is_dynamic_theme "$current_theme"; then
+        wallpapers="$THEMES_DIR/wallpapers"
+        search_type="f" #dynamic themes take from the source and not links
+    fi
     if [[ -z "$theme_name" ]]; then
         log_error "Error: No theme provided"
         exit 1
@@ -132,17 +148,23 @@ set_theme() {
         log_error "Error: No wallpapers for theme"
         exit 1
     fi
-    if [[ $(find "$theme_dir/wallpapers" -type l | wc -l) -eq 0 ]]; then
+    if [[ $(find "$theme_dir/wallpapers" -type "$search_type" | wc -l) -eq 0 ]]; then
         log_error "Error: No wallpapers for theme"
         exit 1
     fi 
-
     ln -nsf "$theme_dir" "$CURRENT_THEME_DIR"
+    local wallpaper="$(random_wallpaper)"
+
+    if is_dynamic_theme "$theme_name"; then
+        generate_colors_from_wallpaper "$wallpaper"
+    fi
+
+    set_wallpaper "$wallpaper"
     reload_apps
-    random_wallpaper
 }
 
 main() {
+    echo "Current theme: $(get_current_theme)"
     if [[ $# -eq 0 ]]; then 
         echo "Usage: themectl <theme-name> | add-bg /path/to/wallpaper | next-bg | wallpaper [wallpaper]"
         exit 1
@@ -157,7 +179,7 @@ main() {
             fi
             ;;
         next-bg)
-            random_wallpaper
+            set_wallpaper "$(random_wallpaper)"
             ;;
         add-bg)
             add_wallpaper "$2"
