@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-killall waybar
-uwsm-app -- waybar > /dev/null 2>&1 &
