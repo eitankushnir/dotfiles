@@ -37,4 +37,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>source %<CR>", { desc = "Execute the curr
 --vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
 --vim.keymap.set("v", "<leader>x", "<cmd>lua<CR>", { desc = "Execute the current selection" })
 
+vim.keymap.set("n", "<leader>|", "<cmd>vsplit<CR>", { desc = "Split verticaly" })
+vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Split horizontaly" })
+
 vim.keymap.set("i", "<C-c>", "<Esc>")

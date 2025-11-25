@@ -8,7 +8,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
         keymap = {
-            preset = "default"
+            preset = "enter"
         },
 
         appearance = {

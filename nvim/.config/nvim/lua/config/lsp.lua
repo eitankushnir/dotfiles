@@ -3,6 +3,7 @@ vim.lsp.enable("clangd")
 vim.lsp.enable("hyprls")
 vim.lsp.enable("pyright")
 vim.lsp.enable("bashls")
+vim.lsp.enable("jdtls")
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
