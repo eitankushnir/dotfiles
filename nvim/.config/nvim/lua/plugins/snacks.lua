@@ -73,7 +73,10 @@ return {
                 end,
                 desc = "Keymaps",
             },
-            { "<leader>gd", function() Snacks.picker.lsp_definitions() end, desc = "Show lsp definistions" },
+            { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Show lsp definistions" },
+            { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Show lsp declarations" },
+            { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "Show lsp symbols for current file" },
+            { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Show lsp symbols for workspace" },
         }
     }
 }
