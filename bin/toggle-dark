@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+if [[ -f /tmp/light ]]; then
+    gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # for GTK4 apps
+    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"   # for GTK3 apps
+    rm /tmp/light
+else
+    gsettings set org.gnome.desktop.interface color-scheme "prefer-light"   # for GTK4 apps
+    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"   # for GTK3 apps
+    touch /tmp/light
+fi
+
