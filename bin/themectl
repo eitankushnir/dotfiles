@@ -20,7 +20,7 @@ get_current_theme() {
 }
 
 get_theme_list() {
-    local themes=("dynamic")
+    local themes=("dynamic(global)")
     local theme_paths=("$THEMES_DIR"/*/)
     for theme in "${theme_paths[@]}"; do
         base=$(basename "$theme")
@@ -35,11 +35,29 @@ get_theme_list() {
 
 reload_apps() {
     log_step "Reloading Apps..."
-    hyprctl reload
+    hyprctl reload &> /dev/null
     restart-app waybar
-    makoctl reload
+    restart-app swayosd-server 
+    restart-walker
+    makoctl reload &> /dev/null
     if pgrep -x waypaper; then
         restart-app waypaper
+    fi
+    apply-for-gnome
+    log_success "Done Realoding Apps"
+}
+
+apply-for-gnome() {
+    if [[ -f "$CURRENT_THEME_DIR/theme.light" ]]; then
+        gsettings set org.gnome.desktop.interface color-scheme "prefer-light"   # for GTK4 apps
+        gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"   # for GTK3 apps
+        touch /tmp/light
+    else
+        gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # for GTK4 apps
+        gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"   # for GTK3 apps
+        if [[ -f /tmp/light ]]; then
+            rm /tmp/light
+        fi
     fi
 }
 
@@ -47,9 +65,13 @@ add_wallpaper() {
     local wallpaper="$1"
 
     #Check if file is given and exists
+    local select_from_base=0
     if [[ -z "$wallpaper" ]]; then
-        log_error "Error: Wallpaper file not provided"
-        exit 1
+        log_warning " Wallpaper file not provided, select one from global to add to specific theme"
+        select_from_base=1
+        local wallpaper_dir="$THEMES_DIR/wallpapers"
+        local wallpapers=("$wallpaper_dir"/*)
+        wallpaper=$(gum choose ${wallpapers[@]} --header "Select a Wallpaper")
     fi
     if [[ ! -f "$wallpaper" ]]; then
         log_error "Error: No such file: $wallpaper"
@@ -66,7 +88,7 @@ add_wallpaper() {
     if [[ "$(realpath $(dirname "$wallpaper"))" != "$THEMES_DIR/wallpapers" ]]; then
         cp "$wallpaper" "$THEMES_DIR/wallpapers/$fname"
     fi
-    if [[ "$theme" != "dynamic" ]]; then
+    if [[ "$theme" != "dynamic(global)" ]]; then
         ln -sf "$THEMES_DIR/wallpapers/$fname" "$THEMES_DIR/$theme/wallpapers/"
     fi
     log_success "Wallpaper successfuly added to theme: $theme"
@@ -100,9 +122,9 @@ set_wallpaper() {
     fi
 
     if ! pgrep -x waypaper; then
-        hyprctl hyprpaper preload "$wallpaper"
-        hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper"
-        hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper"
+        hyprctl hyprpaper preload "$wallpaper" &> /dev/null
+        hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper" &> /dev/null
+        hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper" &> /dev/null
     fi
     log_success "Wallpaper Applied"
 }
@@ -132,7 +154,8 @@ set_theme() {
     local theme_name="$1"
     local theme_dir="$THEMES_DIR/$theme_name"
     local search_type="l"
-    if is_dynamic_theme "$current_theme"; then
+    local wallpapers="$theme_dir/wallpapers"
+    if is_dynamic_theme "$theme_name"; then
         wallpapers="$THEMES_DIR/wallpapers"
         search_type="f" #dynamic themes take from the source and not links
     fi
@@ -140,15 +163,15 @@ set_theme() {
         log_error "Error: No theme provided"
         exit 1
     fi
-    if [[ ! -d "$theme_dir" ]]; then
+    if [[ ! -d "$theme_dir" ]] && ! is_dynamic_theme "$theme_name"; then
         log_error "Error: No such theme"
         exit 1
     fi
-    if [[ ! -d "$theme_dir/wallpapers" ]]; then
+    if [[ ! -d "$wallpapers" ]]; then
         log_error "Error: No wallpapers for theme"
         exit 1
     fi
-    if [[ $(find "$theme_dir/wallpapers" -type "$search_type" | wc -l) -eq 0 ]]; then
+    if [[ $(find "$wallpapers" -type "$search_type" | wc -l) -eq 0 ]]; then
         log_error "Error: No wallpapers for theme"
         exit 1
     fi 
@@ -161,6 +184,7 @@ set_theme() {
 
     set_wallpaper "$wallpaper"
     reload_apps
+    log_success "Theme Set Successfuly!"
 }
 
 main() {
