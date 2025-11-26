@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 2 ]]; then
+    echo "Usage: png2jpg /path/to/image <quality(1-100)>"
+    exit 1
+fi
+
+QUALITY=100
+if [[ $# -eq 2 ]]; then
+    QUALITY=$2
+fi
+
+REALPATH=$(realpath "$1")
+if [[ -d "$REALPATH" ]]; then
+    for file in "$REALPATH"/*; do
+        if [[ ! -f "$file" ]]; then
+            continue 
+        fi
+        IMAGE="$file"
+        IMAGE_PATH=$(dirname $IMAGE)
+        IMAGE_BASE=$(basename $IMAGE)
+        IMAGE_NAME=${IMAGE_BASE%.*}
+        IMAGE_EXT=${IMAGE_BASE##*.}
+        if [[ "$IMAGE_EXT" == "png" ]]; then
+            magick "$IMAGE" -quality "$QUALITY" "$REALPATH/$IMAGE_NAME.jpg"
+        fi
+    done
+    exit 0
+fi
+
+if [[ -f "$REALPATH" ]]; then
+    IMAGE=$1
+    IMAGE_PATH=$(dirname $1)
+    IMAGE_BASE=$(basename $1)
+    IMAGE_NAME=${IMAGE_BASE%.*}
+
+    magick "$IMAGE" -quality "$QUALITY" "$IMAGE_PATH/$IMAGE_NAME.jpg"
+    exit 0
+fi
+
+exit 1
+
