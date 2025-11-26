@@ -82,7 +82,7 @@ return {
         dap.configurations.rust = dap.configurations.cpp
 
         -- Python adapter configuration
-        require('dap-python').setup("python3")
+        require('dap-python').setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python3")
     end
 
 }
