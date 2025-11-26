@@ -4,7 +4,7 @@ if [[ $# -ne 1 ]]; then
     echo "Usage: $0 /path/to/edit"
 fi
 
-PATH_TO_EDIT=$1
+PATH_TO_EDIT=$(realpath "$1")
 if [[ -d "$PATH_TO_EDIT" ]]; then
     DIR="$PATH_TO_EDIT"
 else

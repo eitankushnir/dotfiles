@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-pkill elephant 
-pkill walker 
+pkill elephant &> /dev/null
+pkill walker &> /dev/null
 
-elephant &
-wait 2
+elephant > /dev/null 2>&1 &
 sleep 0.005
-walker --gapplication-service &
+walker --gapplication-service > /dev/null 2>&1 &
