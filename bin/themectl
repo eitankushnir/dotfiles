@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 source "$HOME/.dotfiles/bin/lib/gummies.sh"
 source "$HOME/.dotfiles/bin/lib/handle-dynamic-theme.sh"
+source "$HOME/.dotfiles/bin/lib/change-wlogout-svg-colors.sh"
 
 THEMES_DIR="$HOME/.dotfiles/themes"
 CURRENT_THEME_DIR="$HOME/.dotfiles/current/theme"
@@ -40,6 +41,9 @@ reload_apps() {
     restart-app swayosd-server 
     restart-walker
     makoctl reload &> /dev/null
+    pkill -SIGUSR2 ghostty
+    pkill -SIGUSR1 nvim
+    change_wlogout_icons
     if pgrep -x waypaper; then
         restart-app waypaper
     fi
@@ -121,10 +125,10 @@ set_wallpaper() {
         reload_apps
     fi
 
-    if ! pgrep -x waypaper; then
-        hyprctl hyprpaper preload "$wallpaper" &> /dev/null
-        hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper" &> /dev/null
-        hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper" &> /dev/null
+    if ! pgrep -x waypaper &> /dev/null; then
+         hyprctl hyprpaper preload "$wallpaper" &> /dev/null
+         hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper" &> /dev/null
+         hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper" &> /dev/null
     fi
     log_success "Wallpaper Applied"
 }
@@ -157,6 +161,7 @@ set_theme() {
     local wallpapers="$theme_dir/wallpapers"
     if is_dynamic_theme "$theme_name"; then
         wallpapers="$THEMES_DIR/wallpapers"
+        ln -nsf "$wallpapers" "$theme_dir/wallpapers"
         search_type="f" #dynamic themes take from the source and not links
     fi
     if [[ -z "$theme_name" ]]; then
