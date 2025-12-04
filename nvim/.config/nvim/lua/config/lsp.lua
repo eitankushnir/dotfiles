@@ -1,9 +1,29 @@
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("clangd")
-vim.lsp.enable("hyprls")
-vim.lsp.enable("ty")
-vim.lsp.enable("bashls")
-vim.lsp.enable("jdtls")
+local ensured_installed = {
+    "lua_ls",
+    "clangd",
+    "hyprls",
+    "ty",
+    "bashls",
+    "jdtls",
+    "docker_language_server",
+    "ts_ls",
+    "html",
+    "emmet_language_server",
+}
+
+-- Download all lsps that are in ensure_installed
+for _, config in ipairs(ensured_installed) do
+    local cmd = "$HOME/.dotfiles/bin/nvim-download-lspconf " .. config
+    local f = io.popen(cmd, "r")
+    if not f then
+        print("failed to pipe for cmd " .. cmd)
+    end
+
+    local output = f:read('*all')
+    --vim.notify(output)
+end
+
+vim.lsp.enable(ensured_installed)
 
 
 -- vim.api.nvim_create_autocmd('LspAttach', {

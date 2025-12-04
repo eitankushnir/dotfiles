@@ -26,7 +26,7 @@ return {
         },
         keys = {
             --Picker Keybindings
-            { "<leader><space>", function() Snacks.picker.files() end,      desc = "Find Files" },
+            { "<leader><space>", function() Snacks.picker.files({ hidden = vim.g.snacks_find_hidden }) end,      desc = "Find Files" },
             {
                 "<leader>fb",
                 function()
@@ -77,6 +77,8 @@ return {
             { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Show lsp declarations" },
             { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "Show lsp symbols for current file" },
             { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Show lsp symbols for workspace" },
+            { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, desc = "Show lsp symbols for workspace" },
+            { "<leader>sD", function() Snacks.picker.diagnostics() end, desc = "Show lsp symbols for workspace" },
         }
     }
 }

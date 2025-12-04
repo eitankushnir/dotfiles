@@ -13,6 +13,10 @@ return {
                 "python",
                 "bash",
                 "java",
+                "regex",
+                "markdown",
+                "html",
+                "javascript"
             },
         },
         config = function(_, opts)

@@ -1,5 +1,5 @@
 return {
-    "norcalli/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
     config = function()
         -- since pixel uses cterm colors, we dont want to setup this plugin

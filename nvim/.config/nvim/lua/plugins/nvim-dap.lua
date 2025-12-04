@@ -82,7 +82,30 @@ return {
         dap.configurations.rust = dap.configurations.cpp
 
         -- Python adapter configuration
-        require('dap-python').setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python3")
+        local python_dap_path = mason_path .. "/debugpy/venv/bin/python"
+        require('dap-python').setup(python_dap_path)
+
+        -- Javascript adapter configuration
+        local js_dap_path = mason_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js"
+        dap.adapters["pwa-node"] = {
+            type = "server",
+            host = "localhost",
+            port = "${port}",
+            executable = {
+                command = "node",
+                args = { js_dap_path, "${port}" },
+            },
+        }
+
+        dap.configurations.javascript = {
+            {
+                type = "pwa-node",
+                request = "launch",
+                name = "Launch file",
+                program = "${file}",
+                cwd = "${workspaceFolder}",
+            },
+        }
     end
 
 }

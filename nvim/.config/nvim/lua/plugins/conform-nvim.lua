@@ -10,8 +10,12 @@ return {
         conform.setup({
             formatters_by_ft = {
                 python = { "ruff_format" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
+                javascript = { "biome" },
             }
         })
+
 
         vim.keymap.set({ "n", "v" }, "<leader>ff", function()
             conform.format({
