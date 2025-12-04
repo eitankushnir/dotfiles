@@ -68,7 +68,7 @@
         "on-scroll-up": "swayosd-client --output-volume raise",
         "on-scroll-down": "swayosd-client --output-volume lower",
         "on-click": "hyprctl dispatch exec pavucontrol",
-        "on-click-right": "swayosd-client --output-volume mute-toggle"
+        "on-click-right": "bash $HOME/.dotfiles/bin/toggle-speaker-headphones"
     },
 
     "group/hardwareinfo": {
