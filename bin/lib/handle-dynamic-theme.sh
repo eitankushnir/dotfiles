@@ -19,6 +19,14 @@ generate_colors_from_wallpaper() {
     else
         log_warning "Warning: no matugen found"  
     fi
+
+    echo "Running Wallust..."
+    if command -v wallust &> /dev/null; then
+        wallust -s run "$wallpaper"
+        log_success "Wallust colors generated"
+    else
+        log_warning "Warning: no wallust found"  
+    fi
 }
 
 

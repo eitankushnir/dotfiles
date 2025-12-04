@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+THEME_DIR="$HOME/.dotfiles/themes"
+
+THEME_NAMES=("matugen")
+
+is_dynamic_theme() {
+    local name="$1"
+    [[ "$name" == "wallust" || "$name" == "matugen" ]]
+}
+
+for theme in "$THEME_DIR/"*; do
+    theme_name=$(basename "$theme")
+    if [[ "$theme_name" == "wallpapers" ]] || is_dynamic_theme "$theme_name"; then
+        continue 
+    fi
+    THEME_NAMES+=("$theme_name")
+done
+
+IFS=$'\n'
+LIST=$(echo -e "${THEME_NAMES[*]}")
+unset IFS
+selected_theme=$(echo -e "${LIST[*]}" | walker --dmenu)
+echo $selected_theme
+
+themectl $selected_theme
+
+    
