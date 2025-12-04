@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+floating=$(hyprctl activewindow -j | jq '.floating')
+window=$(hyprctl activewindow -j | jq '.class')
+
+set-floating() {
+    local width=$1
+    local height=$2
+
+    hyprctl --batch "dispatch togglefloating; dispatch resizeactive exact ${width} ${height}; dispatch centerwindow" &> /dev/null
+}
+
+unset-floating() {
+    hyprctl dispatch togglefloating &> /dev/null
+}
+
+toggle-floating() {
+    local width=$1
+    local height=$2
+    
+    if [[ "$floating" == "false" ]]; then
+        set-floating "$width" "$height"
+    else
+        unset-floating 
+    fi
+}
+
+toggle-floating $1 $2

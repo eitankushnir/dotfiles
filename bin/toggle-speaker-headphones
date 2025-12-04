@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+current_sink=$(pactl get-default-sink)
+
+if [[ "$current_sink" == "$SPEAKERS_SINK" ]]; then
+    pactl set-default-sink "$HEADPHONES_SINK"
+else 
+    pactl set-default-sink "$SPEAKERS_SINK"
+fi
+

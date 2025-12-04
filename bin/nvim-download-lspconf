@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+LSPCONFIG_REMOTE="https://raw.githubusercontent.com/neovim/nvim-lspconfig/refs/heads/master/lsp"
+LSPCONFIG_LOCAL="$HOME/.config/nvim/lsp"
+
+update() {
+    [[ "$1" == "--update" ]]
+}
+
+updateall() {
+    [[ "$1" == "--updateall" ]]
+}
+
+download_lsp() {
+    lsp_name=$1
+    lsp_file="$1.lua"
+    lsp_remote="$LSPCONFIG_REMOTE/$lsp_file"
+
+    # skip download if config already present and i did not set update
+    if [[ -f "$LSPCONFIG_LOCAL/$lsp_file" ]] && ! update "$2"; then
+        echo "Config already exists, to override pass --update flag"
+        exit 1
+    fi
+
+    curl -O "$lsp_remote" &> /dev/null
+    if grep "404: Not Found" "$lsp_file" &> /dev/null; then
+        echo "Failed to download lsp: no such lsp"
+        rm "$lsp_file"
+        exit 1
+    fi
+    mv "$lsp_file" "$LSPCONFIG_LOCAL/$lsp_file"
+}
+
+
+if ! command -v curl &> /dev/null; then
+    echo "Must install curl"
+    exit 1
+fi
+
+
+
+# update all configs currently installed
+if updateall "$1"; then
+    echo "Updating all configs..."
+    for file in "$LSPCONFIG_LOCAL"/*; do
+        name=$(basename "$file")
+        name=${name%.*}
+        echo "Updating $name"
+        download_lsp "$name" "--update"
+        echo "Done."
+    done
+    echo "Done updating all configs"
+    exit 0
+fi
+
+
+echo "Downloading $1"
+download_lsp "$1" "$2"
+echo "Done."
+
