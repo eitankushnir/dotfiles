@@ -1,5 +1,5 @@
 @define-color background {{colors.surface.default.hex}};
-@define-color walker {{colors.inverse_primary.default.hex}};
+@define-color border {{colors.inverse_primary.default.hex}};
 @define-color text {{colors.on_surface.default.hex}};
 @define-color selected_item {{colors.surface_variant.default.hex}};
 
