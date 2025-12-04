@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+selected=""
+
+sanity_check() {
+    if ! command -v tmux &>/dev/null; then
+        echo "tmux is not installed. Please install it first."
+        exit 1
+    fi
+
+    if ! command -v fzf &>/dev/null; then
+        echo "fzf is not installed. Please install it first."
+        exit 1
+    fi
+}
+
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t "$1"
+    else
+        tmux switch-client -t "$1"
+    fi
+}
+
+has_session() {
+    tmux list-sessions | grep -q "^$1:"
+}
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(
+        {
+            find ${DEV_DIR}/* -maxdepth 0 -type d;
+            find ${BIU_DIR}/* -maxdepth 1 -type d -not -name '.*';
+            echo "$HOME/.dotfiles";
+            echo "$HOME";
+        } | fzf --border --print-query
+    )
+    selected=$(echo "$selected" | tail -1)
+    echo "$selected"
+fi
+
+if [[ -z "$selected" ]]; then
+    exit 0
+fi
+
+if [[ ! -d "$selected" ]]; then
+    # Check if it is a github repo
+    if [[ "$selected" == https://github.com/* || "$selected" == git@github.com:* ]]; then
+        reponame=$(basename "$selected" .git)
+        echo "Cloning GitHub repo '$reponame' to '${DEV_DIR}/$reponame'."
+        read -p "Enter new directory name or press enter to use '$reponame': " custom_name
+
+        if [[ -n "$custom_name" ]]; then
+            target_dir="${DEV_DIR}/$custome_name"
+        else
+            target_dir="${DEV_DIR}/$reponame"
+        fi
+
+        git clone "$selected" "$target_dir"
+        if [[ $? -eq 0 ]]; then
+            echo "Repository cloned successfully to $target_dir"
+            selected="$target_dir"
+        else
+            echo "Failed to clone repository"
+            exit 1
+        fi
+    else
+        # Offer to create new dir
+        read -p "Directory '${DEV_DIR}/$selected' does not exist. Create it? (y/N)" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            mkdir -p "${DEV_DIR}/$selected"
+            selected="${DEV_DIR}/$selected"
+        else
+            exit 0
+        fi
+    fi
+fi
+
+selected_name=$(basename "$selected" | tr . _ | tr ' ' _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
+    tmux new-session -s "$selected_name" -c "$selected"
+    exit 0
+fi
+
+if ! has_session $selected_name; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+switch_to "$selected_name"
+exit 0
+
