@@ -9,6 +9,7 @@ local ensured_installed = {
     "ts_ls",
     "html",
     "emmet_language_server",
+    "neocmake",
 }
 
 -- Download all lsps that are in ensure_installed
