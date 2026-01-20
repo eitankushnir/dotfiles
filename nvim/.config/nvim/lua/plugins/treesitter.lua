@@ -4,6 +4,7 @@ return {
         lazy = false,
         branch = 'main',
         build = ':TSUpdate',
+        event = 'BufRead',
         opts = {
             ensure_installed = {
                 "lua",
@@ -16,7 +17,10 @@ return {
                 "regex",
                 "markdown",
                 "html",
-                "javascript"
+                "javascript",
+                "typescript",
+                "tsx",
+                "json",
             },
         },
         config = function(_, opts)
@@ -25,9 +29,12 @@ return {
                 require('nvim-treesitter').install(opts.ensure_installed)
                 for _, parser in ipairs(opts.ensure_installed) do
                     local filetypes = parser
+                    if parser == 'tsx' then
+                        filetypes = 'javascriptreact'
+                    end
                     vim.treesitter.language.register(parser, filetypes)
 
-                    vim.api.nvim_create_autocmd({ "Filetype" }, {
+                    vim.api.nvim_create_autocmd({ "FileType" }, {
                         pattern = filetypes,
                         callback = function(event)
                             vim.treesitter.start(event.buf, parser)
@@ -35,6 +42,7 @@ return {
                     })
                 end
             end
+            vim.treesitter.language.register("tsx", "javascriptreact")
         end
     },
     {

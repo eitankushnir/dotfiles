@@ -18,7 +18,7 @@ return {
         "rose-pine/neovim",
         name = "rose-pine",
     },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
     {
         "neanias/everforest-nvim",
         version = false,
@@ -38,6 +38,8 @@ return {
             require('bamboo').load()
         end,
     },
+    { "sainnhe/gruvbox-material", priority = 1000,     config = true,  opts = ... },
+    { "EdenEast/nightfox.nvim" },
     -- {
     --     "bjarneo/pixel.nvim",
     --     priority = 1000,
