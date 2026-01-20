@@ -21,25 +21,37 @@ vim.api.nvim_create_autocmd({ "BufNew", "BufEnter" }, {
     end,
 })
 
+-- Tabstop of 2 on some file types
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'html', 'css', 'javascriptreact' },
+    callback = function ()
+        vim.tapstop = 2
+        vim.softtabstop = 2
+        vim.opt.shiftwidth = 2
+        vim.opt.expandtab = true
+    end
+})
+
 -- Auto theme change
 
 vim.api.nvim_create_autocmd("Signal", {
     pattern = { "SIGUSR1" },
     group = vim.api.nvim_create_augroup("toggle_bg_on_SIGUSR1", {}),
     callback = function()
+        local default = "catppuccin"
         local theme_path = os.getenv("HOME") .. '/.dotfiles/current/theme/neovim.theme'
         local theme_file = io.open(theme_path, "r")
 
         -- Default theme
         if not theme_file then
-            vim.cmd.colorscheme("catppuccin")
+            vim.cmd.colorscheme(default)
             return
         end
         local theme = theme_file:read()
         theme_file:close()
 
         if not theme then
-            vim.cmd.colorscheme("catppuccin")
+            vim.cmd.colorscheme(default)
             return
         end
 

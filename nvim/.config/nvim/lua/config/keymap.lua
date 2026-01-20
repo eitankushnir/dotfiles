@@ -40,4 +40,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>source %<CR>", { desc = "Execute the curr
 vim.keymap.set("n", "<leader>|", "<cmd>vsplit<CR>", { desc = "Split verticaly" })
 vim.keymap.set("n", "<leader>-", "<cmd>split<CR>", { desc = "Split horizontaly" })
 
+vim.keymap.set("n", "<C-a>", "GVgg", { desc = "Select Document" })
+
 vim.keymap.set("i", "<C-c>", "<Esc>")
