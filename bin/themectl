@@ -125,11 +125,11 @@ set_wallpaper() {
         reload_apps
     fi
 
-    if ! pgrep -x waypaper &> /dev/null; then
+    #if ! pgrep -x waypaper &> /dev/null; then
          hyprctl hyprpaper preload "$wallpaper" &> /dev/null
          hyprctl hyprpaper wallpaper "HDMI-A-1,$wallpaper" &> /dev/null
          hyprctl hyprpaper wallpaper "DVI-D-1,$wallpaper" &> /dev/null
-    fi
+    #fi
     log_success "Wallpaper Applied"
 }
 
