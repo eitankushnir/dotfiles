@@ -8,6 +8,7 @@ local ensured_installed = {
     "docker_language_server",
     "ts_ls",
     "html",
+    "cssls",
     "emmet_language_server",
     "neocmake",
 }
@@ -26,22 +27,23 @@ end
 
 vim.lsp.enable(ensured_installed)
 
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if not client then return end
 
--- vim.api.nvim_create_autocmd('LspAttach', {
---     callback = function(ev)
---         local client = vim.lsp.get_client_by_id(ev.data.client_id)
---         if not client then return end
---
---         if client:supports_method("textDocument/formatting", 0) then
---             vim.api.nvim_create_autocmd('BufWritePre', {
---                 buffer = ev.buf,
---                 callback = function()
---                     vim.lsp.buf.format({ bufnr = ev.buf, id = client.id })
---                 end,
---             })
---         end
---     end
--- })
+        client.server_capabilities.semanticTokensProvider = nil
+
+        -- if client:supports_method("textDocument/formatting", 0) then
+        --     vim.api.nvim_create_autocmd('BufWritePre', {
+        --         buffer = ev.buf,
+        --         callback = function()
+        --             vim.lsp.buf.format({ bufnr = ev.buf, id = client.id })
+        --         end,
+        --     })
+        -- end
+    end
+})
 
 vim.diagnostic.config({
     virtual_text = true

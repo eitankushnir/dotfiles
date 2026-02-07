@@ -83,7 +83,7 @@ return {
 
         -- Python adapter configuration
         local python_dap_path = mason_path .. "/debugpy/venv/bin/python"
-        require('dap-python').setup(python_dap_path)
+        require('dap-python').setup("python3")
 
         -- Javascript adapter configuration
         local js_dap_path = mason_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js"
