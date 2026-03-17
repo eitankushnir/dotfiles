@@ -21,7 +21,6 @@ return {
         { "<leader>db",  function() require('dap').toggle_breakpoint() end,                                    desc = "Set breakpoint" },
         { "<leader>dB",  function() require('dap').set_breakpoint(vim.fn.input('Breakpoint Condition: ')) end, desc = "Set conditional breakpoint" },
         { "<leader>dt",  function() require('dapui').toggle() end,                                             desc = "Toggle DapUI" },
-        { "<leader>dT",  function() require('dap').terminate() end,                                            desc = "Terminate debug session" },
         { "<leader>dl",  function() require('dap').run_last() end,                                             desc = "Run the last debug session configuration" },
         {
             "<leader>dr",
@@ -32,6 +31,18 @@ return {
             end,
             desc = "Reset DapUI windows"
         },
+        {
+            "<leader>dk",
+            function()
+                require('dap').terminate()
+                require('dap').disconnect()
+
+                if pcall(require, 'nvim-dap-virtual-text') then
+                    require('nvim-dap-virtual-text').refresh()
+                end
+            end,
+            desc = 'Terminate and disconnect DAP session'
+        }
     },
     config = function()
         local dap = require('dap')
@@ -61,6 +72,20 @@ return {
                 request = "launch",
                 program = function()
                     return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopAtEntry = true,
+            },
+            {
+                name = "Launch file with arguments",
+                type = "cppdbg",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                args = function()
+                    local input = vim.fn.input('Args: ')
+                    return vim.split(input, ' ')
                 end,
                 cwd = '${workspaceFolder}',
                 stopAtEntry = true,
