@@ -11,9 +11,4 @@ require("config.lazy")
 vim.api.nvim_exec_autocmds("Signal", { group = "toggle_bg_on_SIGUSR1", pattern = "SIGUSR1" })
 require("config.pixel-fixes")
 
--- vim.filetype.add({
---     extension = {
---         jsx = "typescriptreact"
---     }
--- })
 vim.treesitter.language.register("tsx", "javascriptreact")
