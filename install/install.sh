@@ -22,9 +22,9 @@ bash "$HOME/dotfiles/install/install-zsh.sh"
 echo "Done with all the confis."
 
 echo "Setting up wallpapers switcher"
-awww-daemon &
-export PATH="$PATH:/$HOME/dotfiles/bin"
-bgswapper rnd
+generate-colors "$HOME/dotfiles/wallpapers/cool-lighthouse.png"
+mkdir -p "$HOME/dotfiles/current"
+ln -nsf "$HOME/dotfiles/themes/matugen" "$HOME/dotfiles/current/theme"
 
 echo "Enabling groups and services"
 bash "$HOME/dotfiles/install/services-and-groups.sh"
