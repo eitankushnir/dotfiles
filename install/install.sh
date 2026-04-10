@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -e
-
 USER="$(whoami)"
 echo "Cloning the repo into $HOME/dotfiles"
 if [[ -d "$HOME/dotfiles" ]]; then
