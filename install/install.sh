@@ -10,14 +10,22 @@ cd "$HOME/dotfiles/install" || exit
 echo "Installing yay"
 bash ./install-yay.sh
 
+cd "$HOME/dotfiles/install" || exit
+
 echo "Installing Packages from pkgs.txt and pkgs-aur.txt"
 bash ./install-pkgs.sh
+
+cd "$HOME/dotfiles/install" || exit
 
 echo "Creating symlinks for all applications in the configs directory"
 bash ./symlink-configs.sh
 
+cd "$HOME/dotfiles/install" || exit
+
 echo "Setting up zsh with oh my zsh"
 bash ./install-zsh.sh
+
+cd "$HOME/dotfiles/install" || exit
 
 echo "Done with all the confis."
 
@@ -26,6 +34,7 @@ awww-daemon &
 export PATH="$PATH:/$HOME/dotfiles/bin"
 bgswapper rnd
 
+cd "$HOME/dotfiles/install" || exit
 echo "Enabling groups and services"
 ./services-and-groups.sh "$USER"
 
