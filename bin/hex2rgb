@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: hex2rgb <hex>"
+  exit 1
+fi
+
+hex=$(echo "${1^^}" | sed 's/#//g')
+
+hex_r="${hex:0:2}"
+hex_g="${hex:2:2}"
+hex_b="${hex:4:2}"
+
+dec_r=$((0x"$hex_r"))
+dec_g=$((0x"$hex_g"))
+dec_b=$((0x"$hex_b"))
+
+echo "$dec_r $dec_g $dec_b"

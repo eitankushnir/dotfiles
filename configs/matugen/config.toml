@@ -1,0 +1,50 @@
+[config]
+
+[templates.ghostty]
+input_path = './templates/ghostty'
+output_path = '~/dotfiles/themes/matugen/ghostty'
+
+[templates.niri]
+input_path = './templates/niri.kdl'
+output_path = '~/dotfiles/themes/matugen/niri.kdl'
+
+[templates.nvim]
+pre_hook = 'echo matugen > ~/dotfiles/themes/matugen/nvim'
+input_path = './templates/nvim.lua'
+output_path = '~/.config/nvim/matugen.lua'
+
+[templates.tmux]
+input_path = './templates/tmux.conf'
+output_path = '~/.config/tmux/generated.conf'
+
+[templates.primary]
+input_path = './templates/primary'
+output_path = '~/.cache/matugen-primary'
+
+[templates.btop]
+input_path = './templates/btop.theme'
+output_path = '~/dotfiles/themes/matugen/btop.theme'
+
+[templates.gtk3]
+input_path = './templates/gtk.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+
+[templates.gtk4]
+input_path = './templates/gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+
+[templates.waybar]
+input_path = './templates/waybar.css'
+output_path = '~/dotfiles/themes/matugen/waybar.css'
+
+[templates.discord]
+input_path = './templates/discord.css'
+output_path = '~/.config/vesktop/themes/matugen.css'
+
+[templates.mako]
+input_path = './templates/mako'
+output_path = '~/dotfiles/themes/matugen/mako'
+
+# [templates.swayosd]
+# input_path = './templates/swayosd.css'
+# output_path = '~/.config/swayosd/style.css'

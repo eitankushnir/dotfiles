@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+
+WALLPAPER_DIR="$HOME/dotfiles/current/theme/wallpapers"
+set_wp_transition() {
+  local FINAL_WALLPAPER="$1"
+  awww img "$FINAL_WALLPAPER" \
+    --transition-type grow \
+    --transition-pos 0.5,0.5 \
+    --transition-duration 1.5 \
+    --transition-fps 60
+
+  if [[ $(current theme) == "matugen" ]]; then
+    generate-colors "$FINAL_WALLPAPER"
+    reload-themed-apps
+  fi
+  exit
+}
+
+if [[ $# -gt 0 ]] && [[ -f "$1" ]]; then
+  set_wp_transition "$1"
+fi
+
+if [[ $# -gt 0 ]] && [[ "$1" =~ ^r.*nd ]]; then
+  set_wp_transition $(find "$WALLPAPER_DIR/" -type f | shuf -n 1)
+fi
+
+# We use two RAM caches to fake the dynamic opacity
+CACHE_BRIGHT="$HOME/.cache/bgswapper/bright"
+CACHE_DIM="$HOME/.cache/bgswapper/dim"
+
+mkdir -p "$CACHE_BRIGHT" "$CACHE_DIM"
+
+# Load wallpapers into an array
+shopt -s nullglob
+WALLPAPERS=("$WALLPAPER_DIR"/*.{jpg,jpeg,png,webp})
+TOTAL_WALLS=${#WALLPAPERS[@]}
+
+CURRENT_WALLPAPER=$(current bg)
+
+if [ "$TOTAL_WALLS" -eq 0 ]; then
+  echo "No wallpapers found!"
+  exit 1
+fi
+
+# Generate Dual Thumbnails (Bright for center, Dim for sides)
+for imagen in "${WALLPAPERS[@]}"; do
+  filename="$(basename "$imagen")"
+  bright_thumb="$CACHE_BRIGHT/$filename"
+  dim_thumb="$CACHE_DIM/$filename"
+
+  if [ ! -f "$bright_thumb" ]; then
+    # 100% Brightness
+    magick "$imagen" -strip -thumbnail "x720^" -gravity center -extent 400x720 "$bright_thumb"
+  fi
+  if [ ! -f "$dim_thumb" ]; then
+    # less opacity
+    magick "$imagen" -strip -thumbnail "x720^" -gravity center -extent 400x720 -alpha set -channel A -evaluate multiply 0.5 +channel "$dim_thumb"
+  fi
+done
+
+# Initialize state
+CURRENT_INDEX=0
+for i in "${!WALLPAPERS[@]}"; do
+  wp=$(basename "${WALLPAPERS[$i]}")
+  if [[ "$wp" == "$CURRENT_WALLPAPER" ]]; then
+    CURRENT_INDEX=$i
+  fi
+done
+
+if [[ $# -gt 0 ]] && [[ "$1" == "next" ]]; then
+  offset=1 # Default to 1 if no number is provided
+  if [[ $# -gt 1 ]] && [[ "$2" =~ ^[0-9]+$ ]]; then
+    offset="$2"
+  fi
+
+  idx=$(((CURRENT_INDEX + offset) % TOTAL_WALLS))
+  set_wp_transition "${WALLPAPERS[$idx]}"
+
+elif [[ $# -gt 0 ]] && [[ "$1" =~ ^prev ]]; then
+  offset=1 # Default to 1 if no number is provided
+  if [[ $# -gt 1 ]] && [[ "$2" =~ ^[0-9]+$ ]]; then
+    offset="$2"
+  fi
+
+  # Safe circular math that prevents negative indexes in Bash
+  idx=$(((CURRENT_INDEX - offset % TOTAL_WALLS + TOTAL_WALLS) % TOTAL_WALLS))
+  set_wp_transition "${WALLPAPERS[$idx]}"
+fi
+# Launch IMV in the background for the live fullscreen preview
+imv -f "${WALLPAPERS[@]}" -n $((CURRENT_INDEX + 1)) &
+IMV_PID=$!
+sleep 0.2
+trap 'kill $IMV_PID 2>/dev/null' EXIT
+
+# The Infinite Rofi Carousel Loop
+while true; do
+
+  imv-msg $IMV_PID goto $((CURRENT_INDEX + 1))
+
+  # Construct the 5-item carousel list
+  ROFI_INPUT=""
+
+  # CHANGED: Now grabbing 2 items to the left, center, and 2 to the right
+  for i in {-2..2}; do
+    idx=$(((CURRENT_INDEX + i) % TOTAL_WALLS))
+    if [ $idx -lt 0 ]; then
+      idx=$((idx + TOTAL_WALLS))
+    fi
+
+    file="${WALLPAPERS[$idx]}"
+    filename="$(basename "$file")"
+
+    if [ "$i" -eq 0 ]; then
+      # The exact center item gets the BRIGHT thumbnail
+      ROFI_INPUT+="$filename\x00icon\x1f$CACHE_BRIGHT/$filename\n"
+    else
+      # The side items get the DIM thumbnail
+      ROFI_INPUT+="$filename\x00icon\x1f$CACHE_DIM/$filename\n"
+    fi
+  done
+
+  # Pipe the 5 items into Rofi.
+  # CHANGED: -selected-row is now 2 (the middle item of 0, 1, [2], 3, 4)
+  _=$(
+    echo -en "$ROFI_INPUT" | rofi -dmenu \
+      -config "$HOME/.config/rofi/bgswapper.rasi" \
+      -selected-row 2 \
+      -kb-row-left "" \
+      -kb-row-right "" \
+      -kb-move-char-back "" \
+      -kb-move-char-forward "" \
+      -kb-custom-1 "Right" \
+      -kb-custom-2 "Left"
+  )
+
+  EXIT_CODE=$?
+
+  if [ $EXIT_CODE -eq 0 ]; then
+    break
+  elif [ $EXIT_CODE -eq 1 ]; then
+    exit 1
+  elif [ $EXIT_CODE -eq 10 ]; then
+    ((CURRENT_INDEX++))
+    if [ "$CURRENT_INDEX" -ge "$TOTAL_WALLS" ]; then CURRENT_INDEX=0; fi
+  elif [ $EXIT_CODE -eq 11 ]; then
+    ((CURRENT_INDEX--))
+    if [ "$CURRENT_INDEX" -lt 0 ]; then CURRENT_INDEX=$((TOTAL_WALLS - 1)); fi
+  fi
+done
+
+# Apply final selection
+FINAL_WALLPAPER="${WALLPAPERS[$CURRENT_INDEX]}"
+awww img "$FINAL_WALLPAPER" --transition-type none
+
+if [[ $(current theme) == "matugen" ]]; then
+  generate-colors "$FINAL_WALLPAPER"
+  reload-themed-apps
+fi
+
+exit 0

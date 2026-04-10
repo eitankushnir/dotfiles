@@ -1,0 +1,93 @@
+# System
+openssh
+gnupg
+keychain
+gnome-keyring
+usbutils
+binutils
+xdg-utils
+
+# Terminal Utilities
+ghostty
+btop
+fd
+fzf
+ripgrep
+tree-sitter
+tree-sitter-cli
+tmux
+bat
+eza
+unzip
+wget
+curl
+jq
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+ly
+
+# Dev Stuff
+git
+lazygit
+neovim
+python
+python-pip
+npm
+nodejs
+go
+docker
+docker-compose
+docker-buildx
+rustup
+
+# Wayland
+niri
+xwayland-satellite
+xdg-desktop-portal-gtk
+xdg-desktop-portal-gnome
+waybar
+rofi
+awww
+wl-clipboard
+grim
+slurp
+mako
+swayosd
+matugen
+imagemagick
+
+# Screen Recording
+ffmpeg
+wf-recorder
+obs-studio
+
+# Files Stuff
+file-roller
+nautilus
+
+# Snapshots
+snapper
+snap-pac
+
+
+# Audio
+pipewire
+wireplumber
+pipewire-pulse
+pipewire-alsa
+pipewire-jack
+pavucontrol
+playerctl
+
+# Fonts
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+ttf-dejavu
+ttf-jetbrains-mono-nerd
+ttf-liberation
+woff2-font-awesome
+
+# Other Apps
+mpv

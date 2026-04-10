@@ -1,0 +1,7 @@
+spawn-at-startup "swayosd-server"
+spawn-at-startup "waybar"
+spawn-at-startup "mako"
+spawn-at-startup "/usr/lib/soteria-polkit/soteria"
+spawn-at-startup "awww-daemon"
+//spawn-at-startup "steam"
+spawn-at-startup "vesktop"

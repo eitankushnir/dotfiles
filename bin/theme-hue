@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+FILE="$HOME/.cache/matugen-primary"
+
+# 2. Read the file, strip whitespace, newlines, and any accidental '#' symbols
+HEX=$(cat "$FILE" | tr -d ' \n\r#')
+
+# Validate that we have exactly 6 characters left
+if [ "${#HEX}" -ne 6 ]; then
+  echo "Error: File must contain a valid 6-character hex code (e.g., FF5733)"
+  exit 1
+fi
+
+# 3. Extract the Red, Green, and Blue hex pairs
+R_HEX="${HEX:0:2}"
+G_HEX="${HEX:2:2}"
+B_HEX="${HEX:4:2}"
+
+# 4. Convert base-16 (hex) to base-10 (decimal)
+R=$((16#$R_HEX))
+G=$((16#$G_HEX))
+B=$((16#$B_HEX))
+
+# 5. Use awk to do the floating-point math for RGB to Hue
+HUE=$(awk -v r="$R" -v g="$G" -v b="$B" 'BEGIN {
+    # Normalize RGB values to 0.0 - 1.0
+    r = r / 255.0;
+    g = g / 255.0;
+    b = b / 255.0;
+
+    # Find the maximum and minimum values of R, G, B
+    max = r; if (g > max) max = g; if (b > max) max = b;
+    min = r; if (g < min) min = g; if (b < min) min = b;
+    delta = max - min;
+
+    # Calculate Hue
+    if (delta == 0) {
+        h = 0;
+    } else if (max == r) {
+        h = 60 * ((g - b) / delta);
+    } else if (max == g) {
+        h = 60 * (((b - r) / delta) + 2);
+    } else {
+        h = 60 * (((r - g) / delta) + 4);
+    }
+
+    # Ensure Hue is positive (0-360)
+    if (h < 0) {
+        h += 360;
+    }
+
+    # Print the Hue rounded to the nearest whole integer
+    printf "%.0f\n", h;
+}')
+
+echo "$HUE"

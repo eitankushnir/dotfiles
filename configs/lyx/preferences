@@ -1,0 +1,142 @@
+# LyX 2.5.0 generated this file. If you want to make your own
+# modifications you should do them from inside LyX and save.
+
+Format 40
+
+
+#
+# MISC SECTION ######################################
+#
+
+\path_prefix "/usr/local/texlive/2026/bin/x86_64-linux/"
+\kbmap true
+\kbmap_primary "null"
+\kbmap_secondary "hebrew"
+\user_name "eitan"
+\user_email ""
+\user_initials ""
+
+#
+# SCREEN & FONTS SECTION ############################
+#
+
+\ui_style "fusion"
+# Set color scheme (system|light|dark)
+\color_scheme \ct_additions_underlined
+\scroll_below_document true
+\screen_font_sizes 5 7 8 9 10 12 14.4 17.26 20.74 24.88
+\single_instance false
+
+#
+# COLOR SECTION ###################################
+#
+
+\set_color "background" "#faf0e6" "#faf0e6"
+\set_color "selectionmath" "#00008b" "#00008b"
+\set_color "latex" "#8b0000" "#d66613"
+\set_color "note" "#ffff00" "#ff6200"
+\set_color "math" "#00008b" "#85f0fe"
+\set_color "changedtextcomparison" "#008080" "#719fb0"
+\set_color "buttonhoverbg" "#c7c7ca" "#c7c7ca"
+\set_color "buttonhoverbg_broken" "#db0b0b" "#db0b0b"
+
+#
+# PRINTER SECTION ###################################
+#
+
+
+#
+# TEX SECTION #######################################
+#
+
+
+#
+# FILE SECTION ######################################
+#
+
+
+#
+# PLAIN TEXT EXPORT SECTION ##############################
+#
+
+
+#
+# SPELLCHECKER SECTION ##############################
+#
+
+
+#
+# LANGUAGE SUPPORT SECTION ##########################
+#
+
+\visual_cursor true
+\language_custom_package ""
+\mark_foreign_language false
+
+#
+# 2nd MISC SUPPORT SECTION ##########################
+#
+
+
+#
+# FORMATS SECTION ##########################
+#
+
+\format "bmp" "bmp" "BMP" "" "xdg-open" "auto" "" "image/x-bmp"
+\format "dia" "dia" "DIA" "" "auto" "auto" "vector,zipped=native" "application/x-dia-diagram"
+\format "dvi" "dvi" "DVI" "D" "auto" "" "document,vector,menu=export" "application/x-dvi"
+\format "dvi3" "dvi" "DVI (LuaTeX)" "V" "auto" "" "document,vector,menu=export" ""
+\format "eps" "eps" "EPS" "" "auto" "" "vector" "image/x-eps"
+\format "eps3" "eps" "EPS (cropped)" "" "auto" "" "document" ""
+\format "eps2" "eps" "EPS (uncropped)" "" "auto" "" "vector" ""
+\format "excel" "xls" "Excel spreadsheet" "" "" "auto" "document" "application/vnd.ms-excel"
+\format "fen" "fen" "FEN" "" "auto" "auto" "" ""
+\format "fig" "fig" "FIG" "" "auto" "auto" "vector" "application/x-xfig"
+\format "gif" "gif" "GIF" "" "xdg-open" "auto" "" "image/gif"
+\format "gnumeric" "gnumeric" "Gnumeric spreadsheet" "" "" "auto" "document" "application/x-gnumeric"
+\format "agr" "agr" "Grace" "" "auto" "auto" "vector" ""
+\format "html" "html, htm" "HTML" "H" "auto" "" "document,menu=export" "text/html"
+\format "html_table" "html" "HTML Table (for spreadsheets)" "" "" "auto" "document" ""
+\format "jpg" "jpg, jpeg" "JPEG" "" "xdg-open" "auto" "" "image/jpeg"
+\format "pdflatex" "tex" "LaTeX (pdflatex)" "" "okular" "kwrite" "document,menu=export" ""
+\format "xhtml" "xhtml" "LyXHTML" "y" "auto" "" "document,menu=export" "application/xhtml+xml"
+\format "excel2" "xlsx" "MS Excel Office Open XML" "" "" "auto" "document" "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+\format "word" "doc" "MS Word" "W" "auto" "auto" "document,vector,menu=export" "application/msword"
+\format "word2" "docx" "MS Word Office Open XML" "O" "auto" "auto" "document,vector,menu=export" "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+\format "noteedit" "not" "Noteedit" "" "auto" "auto" "vector" ""
+\format "odt2" "odt" "OpenDocument (Pandoc)" "" "auto" "auto" "document,vector,menu=export" "application/vnd.oasis.opendocument.text"
+\format "odt" "odt" "OpenDocument (tex4ht)" "" "auto" "auto" "document,vector,menu=export" "application/vnd.oasis.opendocument.text"
+\format "odg" "odg, sxd" "OpenDocument drawing" "" "auto" "auto" "vector,zipped=native" "application/vnd.oasis.opendocument.graphics"
+\format "oocalc" "ods" "OpenDocument spreadsheet" "" "" "auto" "document" "application/vnd.oasis.opendocument.spreadsheet"
+\format "pbm" "pbm" "PBM" "" "xdg-open" "auto" "" "image/x-portable-bitmap"
+\format "pdf7" "pdf" "PDF (cropped)" "" "auto" "" "document,vector" ""
+\format "pdf9" "pdf" "PDF (DocBook)" "" "auto" "" "document,vector,menu=export" ""
+\format "pdf3" "pdf" "PDF (dvipdfm)" "m" "auto" "" "document,vector,menu=export" ""
+\format "pdf6" "pdf" "PDF (graphics)" "" "auto" "" "vector" "application/pdf"
+\format "pdf8" "pdf" "PDF (lower resolution)" "" "auto" "" "document,vector" ""
+\format "pdf5" "pdf" "PDF (LuaTeX)" "u" "auto" "" "document,vector,menu=export" ""
+\format "pdf2" "pdf" "PDF (pdflatex)" "F" "auto" "" "document,vector,menu=export" ""
+\format "pdf" "pdf" "PDF (ps2pdf)" "P" "auto" "" "document,vector,menu=export" ""
+\format "pdf4" "pdf" "PDF (XeTeX)" "X" "zen-browser" "" "document,vector,menu=export" ""
+\format "pgm" "pgm" "PGM" "" "xdg-open" "auto" "" "image/x-portable-graymap"
+\format "png" "png" "PNG" "" "xdg-open" "auto" "" "image/x-png"
+\format "ps" "ps" "Postscript" "t" "auto" "" "document,vector,menu=export" "application/postscript"
+\format "ppm" "ppm" "PPM" "" "xdg-open" "auto" "" "image/x-portable-pixmap"
+\format "rtf" "rtf" "Rich Text Format" "" "auto" "auto" "document,vector,menu=export" "application/rtf"
+\format "svg" "svg" "SVG" "" "auto" "auto" "vector" "image/svg+xml"
+\format "svgz" "svgz" "SVG (compressed)" "" "auto" "auto" "vector,zipped=native" ""
+\format "tgif" "obj, tgo" "Tgif" "" "auto" "auto" "vector" "application/x-tgif"
+\format "tiff" "tif" "TIFF" "" "xdg-open" "auto" "" "image/tiff"
+\format "xbm" "xbm" "XBM" "" "xdg-open" "auto" "" "image/x-xbitmap"
+\format "xhtml_table" "xhtml" "XHTML Table (for spreadsheets)" "" "" "auto" "document" ""
+\format "xpm" "xpm" "XPM" "" "xdg-open" "auto" "" "image/x-xpixmap"
+
+#
+# CONVERTERS SECTION ##########################
+#
+
+
+#
+# COPIERS SECTION ##########################
+#
+

@@ -1,0 +1,45 @@
+@import "../../.dotfiles/current/theme/waybar.css";
+
+* {
+	background-image: none;
+	box-shadow: none;
+}
+
+window {
+	background-color: rgba(12, 12, 12, 0.7);
+}
+
+button {
+    border-radius: 0;
+    border-color: black;
+    text-decoration-color: @forground;
+    color: @foreground;
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    font-size: 20px;
+}
+
+button:active, button:hover {
+ /*   background-color: alpha(@background, 0.65); */
+    background-size: 35%;
+    outline-style: none;
+}
+
+#logout {
+    background-image: url("/home/eitan/.config/wlogout/icons/logout.svg");
+}
+
+#shutdown {
+    background-image: url("/home/eitan/.config/wlogout/icons/shutdown.svg");
+}
+
+#reboot {
+    background-image: url("/home/eitan/.config/wlogout/icons/reboot.svg");
+}
+
+#win {
+    background-image: url("/home/eitan/.config/wlogout/icons/Windows.svg");
+}

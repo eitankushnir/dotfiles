@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if pkexec efibootmgr -n 0000; then
+  reboot
+else
+  notify-send "Reboot Cancelled"
+fi

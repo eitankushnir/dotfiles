@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ "$1" == "theme" ]]; then
+  basename "$(readlink "$HOME/dotfiles/current/theme")"
+elif [[ "$1" == "bg" ]]; then
+  basename "$(awww query | grep '/.*' -o | tail -n1)"
+fi

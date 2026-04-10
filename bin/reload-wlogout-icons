@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+ICONS_DIR="$HOME/.config/wlogout/icons"
+
+color_code="#$(cat "$HOME/.cache/matugen-primary")"
+
+for icon in "$ICONS_DIR"/*.svg; do
+  sed -i "s/fill=\"#[0-9a-fA-F]\{6\}\"/fill=\"$color_code\"/g" "$icon"
+done

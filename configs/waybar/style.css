@@ -1,0 +1,103 @@
+@import "../../dotfiles/current/theme/waybar.css";
+
+* {
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    font-size: 14px;
+    color: @foreground;
+}
+
+window#waybar {
+    background: alpha(@background, 0.75);
+}
+
+#custom-launcher {
+    margin-right: 3px;
+    margin-left: 10px;
+}
+
+#workspaces button {
+    transition: none;
+    min-width: 30px;
+    padding: 0;
+}
+
+#workspaces button:hover {
+    background: transparent;
+}
+
+#workspaces button.visible {
+    border-bottom: 2px solid @visible_workspace;
+    border-radius: 0px;
+}
+
+#workspaces button.active {
+  border-bottom: 2px solid @current_workspace;
+  border-radius: 0px;
+}
+
+tooltip {
+  border: 1px solid @foreground;
+}
+
+#custom-power {
+    font-weight: bold;
+}
+
+#custom-separator {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+#network {
+    margin-right: 6px;
+}
+
+#pulseaudio {
+    margin-right: 15px;
+}
+
+#language {
+    margin-right: 5px;
+}
+
+#keyboard-state {
+    margin-right: 15px;
+    margin-left: 0;
+    font-weight: 900;
+}
+
+
+/*
+#temperature {
+    margin-right: 8px;
+    color: @temp_color;
+}
+
+#cpu {
+    margin-right: 8px;
+    color: @cpu_color;
+}
+
+#memory {
+    margin-right: 8px;
+    color: @mem_color;
+}
+
+#hardwareinfo {
+    margin-right: 20px;
+    border-bottom: 2px solid @accent;
+}
+*/
+
+#tray menu{
+    background: @background;
+}
+
+#tray {
+    margin-left: 3px;
+}

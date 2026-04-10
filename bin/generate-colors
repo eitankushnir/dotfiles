@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+THEMES_DIR="$HOME/dotfiles/themes"
+
+wallpaper="$1"
+mode="dark"
+
+case "$2" in
+--mode)
+  mode="$3"
+  ;;
+esac
+
+mkdir -p "$THEMES_DIR/matugen"
+matugen --source-color-index 0 image "$wallpaper" -m "$mode"

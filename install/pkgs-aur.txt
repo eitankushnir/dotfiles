@@ -1,0 +1,21 @@
+# Browsers
+helium-browser-bin
+zen-browser-bin
+
+# Applications
+zoom
+localsend-bin
+vesktop
+lyx
+wlogout
+
+# Utils
+snap-pac-grub
+nautilus-open-any-terminal
+
+# Polkit
+soteria-git
+
+# Hebrew Fonts
+culmus
+

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+pkill -SIGUSR2 ghostty &>/dev/null
+pkill -SIGUSR1 nvim &>/dev/null
+
+pkill waybar &>/dev/null
+waybar &>/dev/null &
+
+tmux source-file ~/.config/tmux/generated.conf
+
+pkill -SIGUSR2 btop
+makoctl reload
+
+killall swayosd-server && swayosd-server &>/dev/null &
+
+if [[ -z "$1" ]]; then
+  # set-mode "toggle"
+  # set-mode "toggle"
+  if [[ -f "$HOME/dotfiles/current/theme/light.theme" ]]; then
+    set-mode "light"
+  else
+    set-mode "dark"
+  fi
+fi
+
+reload-wlogout-icons

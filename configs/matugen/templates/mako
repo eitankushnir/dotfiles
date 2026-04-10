@@ -1,0 +1,57 @@
+## Mako Notification Daemon Configuration
+## Generated dynamically by Matugen
+
+# --- Global Settings ---
+max-history=100
+sort=-time
+layer=overlay
+anchor=top-right
+
+# --- Appearance ---
+# Change to your preferred Nerd Font
+font=JetBrainsMono Nerd Font 10
+width=350
+height=150
+margin=15
+padding=15
+border-size=2
+border-radius=12
+icons=1
+max-icon-size=48
+icon-location=left
+markup=1
+actions=1
+history=1
+text-alignment=left
+default-timeout=5000
+ignore-timeout=1
+
+# --- Default Colors (Normal Urgency) ---
+background-color={{colors.surface.default.hex}}
+text-color={{colors.on_surface.default.hex}}
+border-color={{colors.primary.default.hex}}
+progress-color={{colors.primary_container.default.hex}}
+
+# --- Urgency: Low ---
+[urgency=low]
+background-color={{colors.surface_variant.default.hex}}
+text-color={{colors.on_surface_variant.default.hex}}
+border-color={{colors.outline_variant.default.hex}}
+default-timeout=3000
+
+# --- Urgency: High (Critical) ---
+[urgency=critical]
+background-color={{colors.error_container.default.hex}}
+text-color={{colors.on_error_container.default.hex}}
+border-color={{colors.error.default.hex}}
+default-timeout=0
+
+# --- App Specific Overrides ---
+# Group volume/brightness notifications together so they replace each other
+[category=volume]
+default-timeout=2000
+group-by=category
+
+[category=brightness]
+default-timeout=2000
+group-by=category

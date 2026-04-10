@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+CLASS="org.gnome.desktop.interface"
+SCHEME="color-scheme"
+THEME="gtk-theme"
+
+if [[ $# -ne 1 ]]; then
+  exit 1
+fi
+
+current=$(gsettings get $CLASS color-scheme | tr -d "\'")
+input="$1"
+new_scheme=""
+new_theme=""
+
+if [[ "$input" == "dark" ]]; then
+  new_scheme="prefer-dark"
+  new_theme="adw-gtk3-dark"
+fi
+
+if [[ "$input" == "light" ]]; then
+  new_scheme="prefer-light"
+  new_theme="adw-gtk3"
+fi
+
+if [[ "$input" == "toggle" ]]; then
+  if [[ "$current" == "prefer-dark" ]]; then
+    new_scheme="prefer-light"
+    new_theme="adw-gtk3"
+  else
+    new_scheme="prefer-dark"
+    new_theme="adw-gtk3-dark"
+  fi
+fi
+
+if [[ -z "$new_scheme" ]]; then
+  echo "Available modes: dark, light, toggle"
+fi
+
+result=$(echo $new_scheme | sed s/^[^-]*-//)
+before=$(echo $current | sed s/^[^-]*-//)
+if [[ "$(current theme)" == "matugen" ]] && [[ "$before" != "$result" ]]; then
+  generate-colors "$HOME/dotfiles/wallpapers/$(current bg)" --mode "$result"
+  reload-themed-apps "skip-setting"
+fi
+
+gsettings set "$CLASS" "$SCHEME" "$new_scheme"
+gsettings set "$CLASS" "$THEME" "$new_theme"
+
+killall soteria
+
+sleep 0.2
+
+export XDG_SESSION_ID=$(loginctl show-user "$(whoami)" -p Display --value)
+/usr/lib/soteria-polkit/soteria &>/dev/null &

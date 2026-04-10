@@ -1,0 +1,148 @@
+{
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30,
+    "modules-left": [
+	    //  "custom/launcher",
+        //"custom/separator",
+        "niri/workspaces",
+        "custom/separator",
+        "tray",
+    ],
+    "modules-center": [
+        "clock",
+    ],
+    "modules-right": [
+        "niri/language",
+        "keyboard-state",
+        "pulseaudio",
+        "network",
+        "custom/separator",
+        "custom/power"
+    ],
+
+    "tray": {
+      "icon-size": 21,
+      "spacing": 10,
+	    "show-passive-items": true,
+    	"reverse-direction": false,
+    	"smooth-scrolling-threshold": 1.0,
+    },
+
+    "custom/launcher": {
+        "format": "{icon}",
+        "format-icons": "󰣇",
+        "on-click": "rofi -show drun",
+        "tooltip": false,
+    },
+
+    "clock": {
+        "format": "{:%A, %d. %b, %H:%M}",
+        "tooltip-format": "{calendar}",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            },
+        },
+        "actions":  {
+            "on-click": "shift_reset",
+                    "on-click-right": "mode",
+                    "on-scroll-up": "shift_down",
+                    "on-scroll-down": "shift_up",
+                    },
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+     },
+
+    "niri/workspaces": {
+        "format": "{value}",
+	      "persistent-workspaces": {},
+        //"current-only": true,
+     },
+
+    "hyprland/language": {
+        "format": " {}",
+        "format-en": "EN",
+        "format-he": "HE",
+        "on-click": "hyprctl switchxkblayout razer-razer-blackwidow-elite next"
+    },
+
+    "niri/language": {
+        "format": " {}",
+        "format-en": "EN",
+        "format-he": "HE",
+        "on-click": "niri msg action switch-layout next"
+    },
+    "keyboard-state": {
+        "numlock": false,
+        "capslock": true,
+        "format": {
+            "numlock": "{icon}",
+            "capslock": "{icon}"                                                                                                                                                       
+        },
+        "format-icons": {
+            "locked": "CAPS",
+            "unlocked": ""
+        }
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-icons": {
+            "headphone": "",
+            "headset": "",
+            "default": ["", "", ""]
+        },
+        "format-muted": "",
+        "tooltip-format": "Playing at {volume}%",
+        "on-scroll-up": "swayosd-client --output-volume raise",
+        "on-scroll-down": "swayosd-client --output-volume lower",
+        "on-click": "pavucontrol",
+        "on-click-right": "bash $HOME/.dotfiles/bin/toggle-speaker-headphones"
+    },
+
+    "group/hardwareinfo": {
+        "orientation": "horizontal",
+        "modules": ["temperature", "cpu", "memory"],
+    },
+    "temperature": {
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""],
+        "tooltip": false,
+        "thermal-zone": 1,
+        "critical-threshold": 90
+    },
+    "cpu": {
+        "format": "C {usage}%",
+    },
+    "memory": {
+        "format": "M {percentage}%"
+    },
+    "network": {
+        "format": "{}",
+        "format-ethernet": "󰌘 {ifname}",
+        "format-disconnected": "󰌙",
+        "format-linked": "󰌚",
+        "tooltip-format-ethernet": "{bandwidthDownBits}  {bandwidthUpBits} ",
+    },
+    "custom/power": {
+        "format": " ",
+        "on-click": "wlogout -b 4",
+        "tooltip": false,
+    },
+    "custom/separator": {
+        "format": "│",
+        "tooltip": false,
+    }
+
+
+}

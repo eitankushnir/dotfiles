@@ -1,0 +1,5 @@
+export PATH="/usr/local/texlive/2026/bin/x86_64-linux:$PATH:$HOME/dotfiles/bin"
+export DEV_DIR="$HOME/Projects"
+export BIU_DIR="$DEV_DIR/BIU"
+export HEADPHONES_SINK="alsa_output.usb-SteelSeries_SteelSeries_GameDAC_000000000000-00.stereo-chat"
+export SPEAKERS_SINK="alsa_output.pci-0000_00_1f.3.analog-stereo"

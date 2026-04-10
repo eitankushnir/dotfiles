@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: jpg2png /path/to/image"
+  exit 1
+fi
+
+REALPATH=$(realpath "$1")
+if [[ -d "$REALPATH" ]]; then
+  for file in "$REALPATH"/*; do
+    if [[ ! -f "$file" ]]; then
+      continue
+    fi
+    IMAGE="$file"
+    IMAGE_PATH=$(dirname "$IMAGE")
+    IMAGE_BASE=$(basename "$IMAGE")
+    IMAGE_NAME=${IMAGE_BASE%.*}
+    IMAGE_EXT=${IMAGE_BASE##*.}
+    if [[ "$IMAGE_EXT" =~ jpg|webp|jpeg|jfif ]]; then
+      magick "$IMAGE" "$REALPATH/$IMAGE_NAME.png"
+    fi
+  done
+  exit 0
+fi
+
+if [[ -f "$REALPATH" ]]; then
+  IMAGE=$1
+  IMAGE_PATH=$(dirname "$1")
+  IMAGE_BASE=$(basename "$1")
+  IMAGE_NAME=${IMAGE_BASE%.*}
+
+  magick "$IMAGE" "$IMAGE_PATH/$IMAGE_NAME.png"
+  exit 0
+fi
+
+exit 1
