@@ -22,6 +22,7 @@ bash "$HOME/dotfiles/install/install-zsh.sh"
 echo "Done with all the confis."
 
 echo "Setting up wallpapers switcher"
+export PATH="$PATH:/$HOME/dotfiles/bin"
 generate-colors "$HOME/dotfiles/wallpapers/cool-lighthouse.png"
 mkdir -p "$HOME/dotfiles/current"
 ln -nsf "$HOME/dotfiles/themes/matugen" "$HOME/dotfiles/current/theme"
