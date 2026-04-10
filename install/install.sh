@@ -28,9 +28,8 @@ awww-daemon &
 export PATH="$PATH:/$HOME/dotfiles/bin"
 bgswapper rnd
 
-cd "$HOME/dotfiles/install" || exit
 echo "Enabling groups and services"
-./services-and-groups.sh "$USER"
+bash "$HOME/dotfiles/install/services-and-groups.sh"
 
 echo "Dont forget to install TexLive"
 echo "Dont forget to install Steam"
