@@ -5,8 +5,8 @@ zen-browser-bin
 # Applications
 zoom
 localsend-bin
-vesktop
-lyx
+vesktop-bin
+lyx-bin
 wlogout
 
 # Utils
