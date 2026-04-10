@@ -1,0 +1,37 @@
+* {
+    background-color: transparent;
+}
+
+mainbox {
+    background-color: rgba(0,0,0,0.0);
+    children: [listview];
+    padding: 10% 0%;
+}
+
+listview {
+    spacing: 15px;
+    padding: 0px 20px;
+    columns: 5;             /* CHANGED: From 7 down to 5 */
+    lines: 1;               /* FORCE it to be a single horizontal line */
+    fixed-columns: true;    /* Lock the grid layout */
+    cycle: false;           
+    scrollbar: false;
+    flow: horizontal;
+    children: [element-icon];
+}
+
+/* Add a nice visual pop to the center item */
+element {
+    border: 3px;
+    border-radius: 10px;
+}
+element.selected {
+    border: 3px;
+    border-color: white;
+    border-radius: 10px;
+}
+
+element-icon {
+    size: 400px;
+    horizontal-align: 0;
+}

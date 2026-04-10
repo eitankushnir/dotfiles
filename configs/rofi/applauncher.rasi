@@ -1,0 +1,11 @@
+configuration {
+    modes: [drun];
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+    sort: true;
+    sorting-method: "fzf";
+    display-drun: "";
+    hover-select: true;
+}
+
+@theme "themes/applauncher.rasi"   
