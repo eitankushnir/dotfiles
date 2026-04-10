@@ -11,5 +11,8 @@ case "$2" in
   ;;
 esac
 
-mkdir -p "$THEMES_DIR/matugen"
+if [[ ! -d "$THEMES_DIR/matugen" ]]; then
+  mkdir -p "$THEMES_DIR/matugen"
+  ln -nsf "$HOME/dotfiles/wallpapers" "$THEMES_DIR/matugen/wallpapers"
+fi
 matugen --source-color-index 0 image "$wallpaper" -m "$mode"
