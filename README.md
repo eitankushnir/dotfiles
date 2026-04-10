@@ -2,6 +2,7 @@
 Dotfiles for Arch Linux paired with niri.
 
 ## Installation
+Finish installing arch linux and run the install script using the following command (will clone the repo for you).
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/eitankushnir/dotfiles/refs/heads/main/install/install.sh)"
 ```
