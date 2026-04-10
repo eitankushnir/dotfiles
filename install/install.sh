@@ -2,7 +2,7 @@
 USER="$(whoami)"
 echo "Cloning the repo into $HOME/dotfiles"
 if [[ -d "$HOME/dotfiles" ]]; then
-  mv -f "$HOME/dotfiles" "$HOME/dotfiles.bak"
+  rm -rf "$HOME/dotfiles"
 fi
 
 git clone "https://github.com/eitankushnir/dotfiles" "$HOME/dotfiles"
