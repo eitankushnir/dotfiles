@@ -39,7 +39,7 @@ go
 docker
 docker-compose
 docker-buildx
-rustup
+rust
 
 # Wayland
 niri
