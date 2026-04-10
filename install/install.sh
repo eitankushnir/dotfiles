@@ -3,29 +3,23 @@ set -e
 
 USER="$(whoami)"
 echo "Cloning the repo into $HOME/dotfiles"
+if [[ -d "$HOME/dotfiles" ]]; then
+  mv -f "$HOME/dotfiles" "$HOME/dotfiles.bak"
+fi
+
 git clone "https://github.com/eitankushnir/dotfiles" "$HOME/dotfiles"
 
-cd "$HOME/dotfiles/install" || exit
-
 echo "Installing yay"
-bash ./install-yay.sh
-
-cd "$HOME/dotfiles/install" || exit
+bash "$HOME/dotfiles/install/install-yay.sh"
 
 echo "Installing Packages from pkgs.txt and pkgs-aur.txt"
-bash ./install-pkgs.sh
-
-cd "$HOME/dotfiles/install" || exit
+bash "$HOME/dotfiles/install/install-pkgs.sh"
 
 echo "Creating symlinks for all applications in the configs directory"
-bash ./symlink-configs.sh
-
-cd "$HOME/dotfiles/install" || exit
+bash "$HOME/dotfiles/install/symlink-configs.sh"
 
 echo "Setting up zsh with oh my zsh"
-bash ./install-zsh.sh
-
-cd "$HOME/dotfiles/install" || exit
+bash "$HOME/dotfiles/install/install-zsh.sh"
 
 echo "Done with all the confis."
 
